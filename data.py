@@ -24,6 +24,11 @@ class message(object):
                 if len(new)>0:
                     self.text.append(new.lower())
         #print(self.hashtags,self.text)
+    def get_text(self):
+        return self.text
+
+    def get_hashtags(self):
+        return self.hashtags
 
 
 class container(object):
@@ -31,6 +36,12 @@ class container(object):
         self.dic=dict()
         for i,r in input.iterrows():
             self.dic[r.id]=message(r)
+    def keys(self):
+        return self.dic.keys()
+
+
+    def get(self,key):
+        return self.dic[key]
 
 
 def main():
