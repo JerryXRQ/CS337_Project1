@@ -7,7 +7,7 @@ class message(object):
         self.hashtags=[]
         self.text=[]
 
-        filter='[A-z|0-9]'
+        filter='[A-z|0-9|-]'
         s=set(["GoldenGlobes","goldenglobes","globes","golden"])
         for words in raw['text'].split(' '):
             if len(words)==0:
