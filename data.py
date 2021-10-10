@@ -2,6 +2,7 @@
 import pandas as pd
 import json
 import re
+
 class message(object):
     def __init__(self,raw):
         self.hashtags=[]
