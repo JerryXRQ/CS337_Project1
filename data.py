@@ -14,6 +14,8 @@ class message(object):
         for words in raw['text'].split(' '):
             if len(words)==0:
                 continue
+            if words.lower()=="rt":
+                continue
             if words[0]=="#" and words[1:] not in s:
                 self.hashtags.append(words[1:].lower())
             elif words[:4]=="http" or words[:3]=="www" or words[0]=="@":
@@ -37,7 +39,7 @@ class container(object):
     def __init__(self,input):
         self.dic=dict()
         curr=0
-        sample=input.sample(frac=0.1)
+        sample=input.sample(min(len(input),200000))
         ten=len(sample)//10
         counter=0
         for i,r in sample.iterrows():
