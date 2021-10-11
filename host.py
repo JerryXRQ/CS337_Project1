@@ -52,7 +52,7 @@ def find_host(container):
     temp.sort(key=lambda x:new[x],reverse=True)
     res=[reduced[0],temp[0]]
     #Cross check the result to get the right answer
-    #print(res,new)
+    print(res,new)
     return res
 
 
@@ -66,10 +66,11 @@ def main():
     run when grading. Do NOT change the name of this function or
     what it returns.'''
     # Your code here
-    file="gg2013.json"
+    file="gg2015.json"
     input=pd.read_json(file)
     c=data.container(input)
     find_host(c)
+
     print("success")
 
 if __name__ == '__main__':

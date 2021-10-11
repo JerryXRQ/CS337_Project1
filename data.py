@@ -2,6 +2,8 @@
 import pandas as pd
 import json
 import re
+from datetime import datetime
+
 class message(object):
     def __init__(self,raw):
         self.hashtags=[]
@@ -34,8 +36,18 @@ class message(object):
 class container(object):
     def __init__(self,input):
         self.dic=dict()
-        for i,r in input.iterrows():
+        curr=0
+        sample=input.sample(frac=0.1)
+        ten=len(sample)//10
+        counter=0
+        for i,r in sample.iterrows():
             self.dic[r.id]=message(r)
+
+            if counter%ten==0:
+                print(curr,"% Finished Processing")
+                curr+=10
+            counter += 1
+            #print(str(r.timestamp_ms))
     def keys(self):
         return self.dic.keys()
 
@@ -51,7 +63,7 @@ def main():
     run when grading. Do NOT change the name of this function or
     what it returns.'''
     # Your code here
-    file="gg2013.json"
+    file="gg2015.json"
     input=pd.read_json(file)
     temp=container(input)
 
