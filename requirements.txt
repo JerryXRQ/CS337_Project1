@@ -2,4 +2,3 @@ numpy
 nltk
 pandas
 IMDbPY
-omdb
