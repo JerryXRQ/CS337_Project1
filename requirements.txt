@@ -1,4 +1,5 @@
 numpy
 nltk
 pandas
-spacy
+IMDbPY
+omdb
