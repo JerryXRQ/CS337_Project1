@@ -10,6 +10,7 @@ from imdb import IMDb
 def narrow_search(container,award):
     reduce = util.process_name(award)
     key_word = set(["nominee","nominees", "nominate", "nominates", "nominated", "nomination"])
+    filter=set(["present","presenter","presenting","copresent","presents","presented","oscar"])
     selected=[]
     for ele in container.keys():
         m=container.get(ele)
@@ -26,6 +27,9 @@ def narrow_search(container,award):
                 break
         if not det1:
             continue
+        for ele in filter:
+            if ele in s:
+                continue
         for kw in key_word:
             if kw in s:
                 det2=True
@@ -35,8 +39,8 @@ def narrow_search(container,award):
 
 def broad_search(container,award):
     reduce = util.expand_search(award)
-    key_word = set(["nominee","nominees", "nominate", "nominates", "nominated", "nomination"])
-    filter=set(["present","presenter","presenting","copresent","presents","presented"])
+    key_word = set(["nominee","nominees", "nominate", "nominates", "nominated", "nomination","win","won","wins"])
+    filter=set(["present","presenter","presenting","copresent","presents","presented","oscar"])
     selected = []
     for ele in container.keys():
         m = container.get(ele)
@@ -51,10 +55,14 @@ def broad_search(container,award):
             elif words not in s:
                 det1 = False
                 break
-            if words in filter:
-                det1=False
-                break
         if not det1:
+            continue
+        detf=True
+        for ele in filter:
+            if ele in s:
+                detf=False
+                break
+        if not detf:
             continue
         for kw in key_word:
             if kw in s:
@@ -76,26 +84,35 @@ def find_person(tweets):
                 # print(ent.text)
 
 def find_object(tweets):
-    dic=defaultdict(int)
-    ia = IMDb()
-    for ele in tweets:
-        cut=[]
-        for i in range(len(ele)):
-            if ele[i]=="nominee" or ele[i]=="nominees" or ele[i]=="nominate" or ele[i]=="nominates":
-                cut=ele[i+1:]
+    dic = defaultdict(int)
+    nlp = spacy.load("en_core_web_sm")
+    filter=set(["golden globe","the golden globe","good","goldenglobes","series","you","tv","awards",
+                "comedy","season","deserve","award","drama","motion","picture","movie","song","great","win"])
+    strict=set(["motion","picture","movie","animated",'golden globes',"nominee","nominees","drama","him",
+                "their","they","it","congrats","best","winner","congratulations","i","we","his","her","man",
+                "woman","boy","girl","girls","part","she","he"])
+    for tweets in tweets:
+        sentence = " ".join(tweets)
+        doc = nlp(sentence)
+        for np in doc.noun_chunks:  # use np instead of np.text
+            det=True
+            if np.text in filter:
                 break
-            elif ele[i]=="nominated" or ele[i]=="nomination":
-                cut=ele[:i]
-                break
-        print(cut)
-        for words in cut:
-            res=ia.search_movie(words)
-            if res and "2013" in res[0]['long imdb title']:
-                print(res)
-
-
-
+            for ele in np.text.split():
+                if ele in strict:
+                    det=False
+                    break
+            if det:
+                dic[np.text]+=1
+    keys=[k for k in dic.keys()]
+    keys.sort(key=lambda x:dic[x],reverse=True)
+    for i in range(min(len(keys),5)):
+        keys[i]=keys[i].replace("the golden globe","")
+        keys[i] = keys[i].replace("the golden globe", "")
+        keys[i] = keys[i].replace(" goldenglobes", "")
+    print(keys[:min(len(keys),5)])
     return dic
+
 
 
 def find_nominee(container,award):
@@ -104,19 +121,21 @@ def find_nominee(container,award):
         selected=broad_search(container,award)
 
     dic=None
-    if "actor" in award or "actress" in award or "director" in award:
+    if "actor" in award or "actress" in award or "director" in award or "cecil" in award:
         dic = find_person(selected)
 
     else:
+        print("TAKEN")
         dic=find_object(selected)
 
     k=[k for k in dic.keys()]
     k.sort(key=lambda x:dic[x],reverse=True)
     #print(k)
 
-
+    res=[]
     for j in range(min(5,len(k))):
-       print(k[j])
+        temp=k[j].replace("nominee ","")
+       #print(k[j])
     return
 
 
