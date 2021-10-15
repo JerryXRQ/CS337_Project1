@@ -36,7 +36,9 @@ class message(object):
 
 
 class container(object):
-    def __init__(self,input):
+    def __init__(self,year):
+        file="gg"+year+".json"
+        input = pd.read_json(file)
         self.dic=dict()
         curr=0
         sample=input.sample(min(len(input),200000))

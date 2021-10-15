@@ -119,7 +119,7 @@ def find_object(tweets):
         keys[i]=keys[i].replace("the golden globe","")
         keys[i] = keys[i].replace("the golden globe", "")
         keys[i] = keys[i].replace(" goldenglobes", "")
-    print(keys[:min(len(keys),5)])
+    #print(keys[:min(len(keys),5)])
     return dic
 
 
@@ -134,7 +134,7 @@ def find_nominee(container,award):
         dic = find_person(selected)
 
     else:
-        print("TAKEN")
+        #print("TAKEN")
         dic=find_object(selected)
 
     k=[k for k in dic.keys()]
@@ -144,8 +144,9 @@ def find_nominee(container,award):
     res=[]
     for j in range(min(5,len(k))):
         temp=k[j].replace("nominee ","")
+        res.append(temp)
        #print(k[j])
-    return
+    return res
 
 
 

@@ -5,7 +5,7 @@ import pandas as pd
 from collections import defaultdict
 import nltk
 
-def find_host(container):
+def find_award(container):
     nlp = spacy.load("en_core_web_sm")
     candidate=defaultdict(int)
     filter=set(["buy","movie","hotel","friend","moments","of","speech","score","dir","ever","dressed","nominee","i","we","alive","rubs","my","amazing","like","he","she","it","twitter","awkward","parts","show","insults","part"])
@@ -52,15 +52,8 @@ def find_host(container):
 
     keys=[k for k in candidate.keys()]
     keys.sort(key=lambda x: candidate[x],reverse=True)
-    for i in range(25):
-        print(keys[i])
-    for ele in candidate:
-        if candidate[ele]>=20:
-            return
-            #print(ele,candidate[ele])
 
-    #print(candidate)
-    return
+    return keys[:min(len(keys),22)]
 
 
 

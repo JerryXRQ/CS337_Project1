@@ -52,7 +52,7 @@ def find_host(container):
     temp.sort(key=lambda x:new[x],reverse=True)
     res=[reduced[0],temp[0]]
     #Cross check the result to get the right answer
-    print(res,new)
+    #print(res,new)
     return res
 
 

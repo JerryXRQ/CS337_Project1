@@ -93,7 +93,7 @@ def find_presenter(container,award):
     for j in range(min(2,len(k))):
        print(k[j])
     #print(candidate)
-    return
+    return k[:min(2,len(k))]
 
 
 
