@@ -9,9 +9,10 @@ from imdb import IMDb
 
 def narrow_search(container,award):
     reduce = util.process_name(award)
-    key_word = set(["nominee","nominees", "nominate", "nominates", "nominated", "nomination"])
-    filter=set(["present","presenter","presenting","copresent","presents","presented","oscar"])
+    key_word = set(["win","won","wins","winning","goes to","receive"])
+    filter=set(["nominee","nominate","nominates","present","presenter","presenting","copresent","presents","presented","oscar"])
     selected=[]
+    #print(reduce)
     if "supporting" not in reduce:
         filter.add("supporting")
     for ele in container.keys():
@@ -34,19 +35,18 @@ def narrow_search(container,award):
             if ele in s:
                 detf=False
                 break
-        if not detf:
-            continue
+
         for kw in key_word:
             if kw in s:
                 det2=True
-        if det2:
+        if det2 and detf:
             selected.append(lis)
     return selected
 
 def broad_search(container,award):
     reduce = util.expand_search(award)
-    key_word = set(["nominee","nominees", "nominate", "nominates", "nominated", "nomination","win","won","wins"])
-    filter=set(["present","presenter","presenting","copresent","presents","presented","oscar"])
+    key_word = set(["win","won","wins","winning","goes to","receive"])
+    filter=set(["nominee","nominate","nominates","present","presenter","presenting","copresent","presents","presented","oscar"])
     selected = []
     if "supporting" not in reduce:
         filter.add("supporting")
@@ -94,12 +94,12 @@ def find_person(tweets):
 def find_object(tweets):
     dic = defaultdict(int)
     nlp = spacy.load("en_core_web_sm")
-    filter=set(["golden globe","the golden globe","good","goldenglobes","series","you","tv","awards",
-                "comedy","season","deserve","award","drama","motion","picture","movie","song","great","win"
-                   ,"who","what","the","guy"])
-    strict=set(["goldenglobes","motion","picture","movie","animated",'golden',"nominee","nominees","drama","him",
+    filter=set(["golden globe","golden globes","the golden globe","good","goldenglobes","series","you","tv","awards",
+                "comedy","season","deserve","award","drama","motion","picture","movie","song","great","cheers","the",
+                "disneypixars","disney","pixars","|","crew","writer","disney princess","video","todayshow"])
+    strict=set(["motion","picture","movie","animated",'golden globes',"nominee","nominees","drama","him",
                 "their","they","it","congrats","best","winner","congratulations","i","we","his","her","man",
-                "woman","boy","girl","girls","part","she","he","so","hmmm","love","outstanding","is","president","song","original","what","bad"])
+                "woman","comedy","series","part","she","he","my"])
     for tweets in tweets:
         sentence = " ".join(tweets)
         doc = nlp(sentence)
@@ -119,12 +119,13 @@ def find_object(tweets):
         keys[i]=keys[i].replace("the golden globe","")
         keys[i] = keys[i].replace("the golden globe", "")
         keys[i] = keys[i].replace(" goldenglobes", "")
+        keys[i] = keys[i].replace("goldenglobes ", "")
     print(keys[:min(len(keys),5)])
     return dic
 
 
 
-def find_nominee(container,award):
+def find_winner(container,award):
     selected=narrow_search(container,award)
     if len(selected)<5:
         selected=broad_search(container,award)
@@ -141,11 +142,9 @@ def find_nominee(container,award):
     k.sort(key=lambda x:dic[x],reverse=True)
     #print(k)
 
-    res=[]
-    for j in range(min(5,len(k))):
-        temp=k[j].replace("nominee ","")
-       #print(k[j])
-    return
+    temp=k[0].replace("winner ","")
+    print(temp)
+    return temp
 
 
 
@@ -184,11 +183,11 @@ def main():
     file="gg2013.json"
     input=pd.read_json(file)
     c=data.container(input)
-    #find_presenter(c,"best performance by an actor in a television series - comedy or musical")
+    #find_winner(c,'best performance by an actress in a mini-series or motion picture made for television')
     #return
     for ele in OFFICIAL_AWARDS_1315:
         print(ele)
-        find_nominee(c, ele)
+        find_winner(c, ele)
     print("Done")
 
 if __name__ == '__main__':
