@@ -5,7 +5,6 @@ import pandas as pd
 from collections import defaultdict
 import nltk
 import util
-from imdb import IMDb
 
 def narrow_search(container,award):
     reduce = util.process_name(award)
@@ -113,14 +112,6 @@ def find_object(tweets):
                     break
             if det:
                 dic[np.text]+=1
-    keys=[k for k in dic.keys()]
-    keys.sort(key=lambda x:dic[x],reverse=True)
-    for i in range(min(len(keys),5)):
-        keys[i]=keys[i].replace("the golden globe","")
-        keys[i] = keys[i].replace("the golden globe", "")
-        keys[i] = keys[i].replace(" goldenglobes", "")
-        keys[i] = keys[i].replace("goldenglobes ", "")
-    print(keys[:min(len(keys),5)])
     return dic
 
 
@@ -135,16 +126,18 @@ def find_winner(container,award):
         dic = find_person(selected)
 
     else:
-        print("TAKEN")
+        #print("TAKEN")
         dic=find_object(selected)
 
     k=[k for k in dic.keys()]
     k.sort(key=lambda x:dic[x],reverse=True)
-    #print(k)
-
-    temp=k[0].replace("winner ","")
-    print(temp)
-    return temp
+    res=k[0]
+    res = res.replace("the golden globe", "")
+    res = res.replace("the golden globe", "")
+    res = res.replace(" goldenglobes", "")
+    res = res.replace("goldenglobes ", "")
+    res=res.replace("winner ","")
+    return res
 
 
 
@@ -182,12 +175,10 @@ def main():
 
 
     c=data.container('2013')
-    #find_winner(c,'best performance by an actress in a mini-series or motion picture made for television')
-    #return
     for ele in OFFICIAL_AWARDS_1315:
         print(ele)
         find_winner(c, ele)
-    print("Done")
+    #print("Done")
 
 if __name__ == '__main__':
     main()

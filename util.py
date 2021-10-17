@@ -6,6 +6,8 @@ from datetime import datetime
 
 def process_name(award_name):
     award_name.lower()
+    if "original song" in award_name:
+        return ["original","song"]
     new = ""
     filter = '[A-z|0-9| ]'
     for characters in award_name:

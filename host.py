@@ -66,9 +66,7 @@ def main():
     run when grading. Do NOT change the name of this function or
     what it returns.'''
     # Your code here
-    file="gg2015.json"
-    input=pd.read_json(file)
-    c=data.container(input)
+    c=data.container("2015")
     find_host(c)
 
     print("success")

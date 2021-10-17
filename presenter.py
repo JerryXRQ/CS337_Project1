@@ -129,9 +129,8 @@ def main():
                             'best performance by an actress in a supporting role in a series, mini-series or motion picture made for television',
                             'best performance by an actor in a supporting role in a series, mini-series or motion picture made for television']
 
-    file="gg2013.json"
-    input=pd.read_json(file)
-    c=data.container(input)
+
+    c=data.container("2013")
     #find_presenter(c,"best performance by an actor in a television series - comedy or musical")
     #return
     for ele in OFFICIAL_AWARDS_1315:
