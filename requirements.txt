@@ -2,3 +2,4 @@ numpy
 nltk
 pandas
 spacy==2.3.5
+bs4

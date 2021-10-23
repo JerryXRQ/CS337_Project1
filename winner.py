@@ -177,7 +177,7 @@ def main():
     c=data.container('2013')
     for ele in OFFICIAL_AWARDS_1315:
         print(ele)
-        find_winner(c, ele)
+        print(find_winner(c, ele))
     #print("Done")
 
 if __name__ == '__main__':
