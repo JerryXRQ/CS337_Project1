@@ -16,7 +16,7 @@ def search(container,award):
     selected=[]
 
     #print(reduce)
-    if "supporting" not in reduce:
+    if "supporting" not in reduce and ("actor" in reduce or "actress" in reduce):
         filter.add("supporting")
     for ele in container.keys():
         m=container.get(ele)
@@ -290,6 +290,7 @@ def find_nominee(container,award):
     dic=None
     if len(selected)<5:
         target=winner.find_winner(container, award)
+
         new=winner_based(target,container)
         if "actor" in award or "actress" in award or "director" in award or "cecil" in award:
             dic = find_person(new)

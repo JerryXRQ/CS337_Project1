@@ -22,6 +22,8 @@ def find_award(container):
                 for j in range(i+1,len(lis)):
                     if lis[j] in filter:
                         break
+                    if lis[j]=="":
+                        break
                     if lis[j][-1]=="-" and lis[j]!="-":
                         target = lis[i:j+1]
                         extract = ' '.join(target)

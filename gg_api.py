@@ -36,10 +36,10 @@ def get_nominees(year):
     nominees={}
     if year=='2013' or year=='2015':
         for ele in OFFICIAL_AWARDS_1315:
-            nominees[ele]=nominee.find_nominee(container,ele,year)
+            nominees[ele]=nominee.find_nominee(container,ele)
     else:
         for ele in OFFICIAL_AWARDS_1819:
-            nominees[ele]=nominee.find_nominee(container,ele,year)
+            nominees[ele]=nominee.find_nominee(container,ele)
     return nominees
 
 def get_winner(year):

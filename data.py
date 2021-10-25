@@ -9,24 +9,30 @@ class message(object):
         self.hashtags=[]
         self.text=[]
 
-        filter='[A-z|0-9|-]'
+        #filter='[A-z|0-9|-]'
         s=set(["GoldenGlobes","goldenglobes","globes","golden"])
         for words in raw['text'].split(' '):
             if len(words)==0:
                 continue
             if words.lower()=="rt":
                 continue
-            if words[0]=="#" and words[1:] not in s:
-                self.hashtags.append(words[1:].lower())
-            elif words[:4]=="http" or words[:3]=="www" or words[0]=="@":
+            if "#" in words:
+                remove=words.replace("#","")
+                if remove not in s:
+                    self.hashtags.append(words[1:].lower())
+            elif words[:4]=="http" or words[:3]=="www" or "@" in words:
                 continue
+
             else:
-                new=""
-                for characters in words:
-                    if re.match(filter,characters):
-                        new+=characters
-                if len(new)>0:
-                    self.text.append(new.lower())
+                #new=""
+                #for characters in words:
+                    #if re.match(filter,characters):
+                        #new+=characters
+                #if len(new)>0:
+                final=words.lower()
+                final=final.replace('"',"")
+                final = final.replace("'s","")
+                self.text.append(final)
         #print(self.hashtags,self.text)
     def get_text(self):
         return self.text

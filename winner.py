@@ -12,7 +12,7 @@ def narrow_search(container,award):
     filter=set(["nominee","nominate","nominates","present","presenter","presenting","copresent","presents","presented","oscar"])
     selected=[]
     #print(reduce)
-    if "supporting" not in reduce:
+    if "supporting" not in reduce and ("actor" in reduce or "actress" in reduce):
         filter.add("supporting")
     for ele in container.keys():
         m=container.get(ele)
@@ -45,9 +45,9 @@ def narrow_search(container,award):
 def broad_search(container,award):
     reduce = util.expand_search(award)
     key_word = set(["win","won","wins","winning","goes to","receive"])
-    filter=set(["nominee","nominate","nominates","present","presenter","presenting","copresent","presents","presented","oscar"])
+    filter=set(["nominee","nominate","nominates","present","presenter","presenting","copresent","presents","presented","oscar","should","hope","should've"])
     selected = []
-    if "supporting" not in reduce:
+    if "supporting" not in reduce and ("actor" in reduce or "actress" in reduce):
         filter.add("supporting")
     for ele in container.keys():
         m = container.get(ele)
@@ -59,7 +59,7 @@ def broad_search(container,award):
             if words == "tv":
                 if "tv" in s or "television" in s:
                     continue
-            elif words not in s:
+            elif words not in s and words+"." not in s:
                 det1 = False
                 break
         if not det1:
@@ -76,6 +76,7 @@ def broad_search(container,award):
                 det2 = True
         if det2:
             selected.append(lis)
+    #print(selected)
     return selected
 
 def find_person(tweets):
@@ -98,7 +99,7 @@ def find_object(tweets):
                 "disneypixars","disney","pixars","|","crew","writer","disney princess","video","todayshow"])
     strict=set(["motion","picture","movie","animated",'golden globes',"nominee","nominees","drama","him",
                 "their","they","it","congrats","best","winner","congratulations","i","we","his","her","man",
-                "woman","comedy","series","part","she","he","my"])
+                "woman","comedy","series","part","she","he","my","everything"])
     for tweets in tweets:
         sentence = " ".join(tweets)
         doc = nlp(sentence)
@@ -132,13 +133,14 @@ def find_winner(container,award):
     k=[k for k in dic.keys()]
     k.sort(key=lambda x:dic[x],reverse=True)
     if len(k)==0:
-        return []
+        return ""
     res=k[0]
     res = res.replace("the golden globe", "")
     res = res.replace("the golden globe", "")
     res = res.replace(" goldenglobes", "")
     res = res.replace("goldenglobes ", "")
-    res=res.replace("winner ","")
+    res =res.replace("winner ","")
+    res =res.replace(" wins","")
     return res
 
 
@@ -175,8 +177,9 @@ def main():
                             'best performance by an actress in a supporting role in a series, mini-series or motion picture made for television',
                             'best performance by an actor in a supporting role in a series, mini-series or motion picture made for television']
 
-
     c=data.container('2013')
+    #print(find_winner(c,'cecil b. demille award'))
+    #return
     for ele in OFFICIAL_AWARDS_1315:
         print(ele)
         print(find_winner(c, ele))
