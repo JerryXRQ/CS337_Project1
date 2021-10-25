@@ -131,6 +131,8 @@ def find_winner(container,award):
 
     k=[k for k in dic.keys()]
     k.sort(key=lambda x:dic[x],reverse=True)
+    if len(k)==0:
+        return []
     res=k[0]
     res = res.replace("the golden globe", "")
     res = res.replace("the golden globe", "")

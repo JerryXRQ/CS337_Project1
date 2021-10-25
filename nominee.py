@@ -240,7 +240,7 @@ def find_object(tweets):
                 "his","her","man","woman","boy","girl","girls","part","she","he","so","hmmm","love","outstanding","is","president","song","original","hell","tonightso"
                 "this","what","bad","oscar","rage","amp","every","hell","winner","night","ok","pronunciation","next","news","anything","ovation","me","our","coffins","ampas"
                 ,"luck","yay","film","victory","blow","evening","movies","films","success","myself","tv","no","something","everyone","pic","globes","internet",'produce',
-                "them","lets","description","hollywood","writers","act","support","person","parents","category","year","fact"])
+                "them","lets","description","hollywood","writers","act","support","person","parents","category","year","fact","win","years","everything","actor"])
     for tweets in tweets:
         sentence = " ".join(tweets)
         doc = nlp(sentence)
@@ -296,7 +296,8 @@ def find_nominee(container,award):
 
         else:
             dic = find_object(new)
-        dic.pop(target)
+        if target in dic:
+            dic.pop(target)
     else:
         if "actor" in award or "actress" in award or "director" in award or "cecil" in award:
             dic=find_person(selected)
