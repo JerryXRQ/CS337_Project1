@@ -6,9 +6,9 @@ from collections import defaultdict
 import nltk
 import util
 from textblob import TextBlob
+from bing_image_downloader import downloader
 
-
-def red_carpet(container):
+def red_carpet(container,year):
     filter=set(["golden","globes","golden globes","goldenglobes","redcarpetman"])
     res=[]
     counter=defaultdict(int)
@@ -57,6 +57,12 @@ def red_carpet(container):
         if counter[sentiment[j]] > 30:
             worst.append(sentiment[j])
         j -= 1
+    for ele in best:
+        downloader.download(ele+"golden globes"+year+"red carpet",limit=1,output_dir='red_carpet', adult_filter_off=False, force_replace=False, timeout=60, verbose=True)
+    for ele in worst:
+        downloader.download(ele+"golden globes"+year+"red carpet",limit=1,output_dir='red_carpet', adult_filter_off=False, force_replace=False, timeout=60, verbose=True)
+    print("Images saved to folder red_carpet")
+
     print("Most Mentioned: ",mention[:min(len(mention),3)])
     print("Best Dressed: ", best)
     print("Worst Dressed: ", worst)
@@ -78,7 +84,8 @@ def main():
     what it returns.'''
 
     c=data.container('2013')
-    red_carpet(c)
+    year='2013'
+    red_carpet(c,year)
 
     #print("Done")
 
