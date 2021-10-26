@@ -9,7 +9,7 @@ class message(object):
         self.hashtags=[]
         self.text=[]
 
-        #filter='[A-z|0-9|-]'
+        filter='[A-z|0-9|-|,|:]'
         s=set(["GoldenGlobes","goldenglobes","globes","golden"])
         for words in raw['text'].split(' '):
             if len(words)==0:
@@ -24,15 +24,13 @@ class message(object):
                 continue
 
             else:
-                #new=""
-                #for characters in words:
-                    #if re.match(filter,characters):
-                        #new+=characters
-                #if len(new)>0:
-                final=words.lower()
-                final=final.replace('"',"")
-                final = final.replace("'s","")
-                self.text.append(final)
+                new=""
+                for characters in words:
+                    if re.match(filter,characters):
+                        new+=characters
+                if len(new)>0:
+                    final=new.lower()
+                    self.text.append(final)
         #print(self.hashtags,self.text)
     def get_text(self):
         return self.text
@@ -47,7 +45,7 @@ class container(object):
         input = pd.read_json(file)
         self.dic=dict()
         curr=0
-        sample=input.sample(min(len(input),200000))
+        sample=input.sample(min(len(input),500000))
         ten=len(sample)//10
         counter=0
         for i,r in sample.iterrows():

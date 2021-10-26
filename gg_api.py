@@ -15,7 +15,6 @@ def get_hosts(year):
     '''Hosts is a list of one or more strings. Do NOT change the name
     of this function or what it returns.'''
     # Your code here
-    container=data.container(year)
     hosts=host.find_host(container)
     return hosts
 
@@ -23,8 +22,8 @@ def get_awards(year):
     '''Awards is a list of strings. Do NOT change the name
     of this function or what it returns.'''
     # Your code here
-    container = data.container(year)
     awards=award.find_award(container)
+    print(year+"awards finished")
     return awards
 
 def get_nominees(year):
@@ -32,7 +31,6 @@ def get_nominees(year):
     names as keys, and each entry a list of strings. Do NOT change
     the name of this function or what it returns.'''
     # Your code here
-    container = data.container(year)
     nominees={}
     if year=='2013' or year=='2015':
         for ele in OFFICIAL_AWARDS_1315:
@@ -40,6 +38,8 @@ def get_nominees(year):
     else:
         for ele in OFFICIAL_AWARDS_1819:
             nominees[ele]=nominee.find_nominee(container,ele)
+
+    print(year+"nominees finished")
     return nominees
 
 def get_winner(year):
@@ -48,13 +48,13 @@ def get_winner(year):
     Do NOT change the name of this function or what it returns.'''
     # Your code here
     winners = {}
-    container = data.container(year)
     if year == '2013' or year == '2015':
         for ele in OFFICIAL_AWARDS_1315:
             winners[ele] = winner.find_winner(container, ele)
     else:
         for ele in OFFICIAL_AWARDS_1819:
             winners[ele] = winner.find_winner(container, ele)
+    print(year+"winners finished")
     return winners
 
 def get_presenters(year):
@@ -63,23 +63,23 @@ def get_presenters(year):
     name of this function or what it returns.'''
     # Your code here
     presenters = {}
-    container = data.container(year)
     if year == '2013' or year == '2015':
         for ele in OFFICIAL_AWARDS_1315:
             presenters[ele] = presenter.find_presenter(container, ele)
     else:
         for ele in OFFICIAL_AWARDS_1819:
             presenters[ele] = presenter.find_presenter(container, ele)
+    print(year+"presenters finished")
     return presenters
 
-def pre_ceremony():
+def pre_ceremony(year):
     '''This function loads/fetches/processes any data your program
     will use, and stores that data in your DB or in a json, csv, or
     plain text file. It is the first thing the TA will run when grading.
     Do NOT change the name of this function or what it returns.'''
     # Your code here
     global container
-    container = data.container('2015')
+    container = data.container(year)
     print("Pre-ceremony processing complete.")
     return
 

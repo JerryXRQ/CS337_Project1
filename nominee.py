@@ -21,7 +21,7 @@ def search(container,award):
     for ele in container.keys():
         m=container.get(ele)
         lis=m.get_text()
-        s=" ".join(lis)
+        s=set(lis)
         det1=True
         det2=False
         for words in reduce:
@@ -156,7 +156,7 @@ def find_person(tweets):
                   "comedy", "season", "deserve", "award", "drama", "motion", "picture", "movie", "song", "great", "win"
                 , "who", "what", "the", "guy", "tune", "nbc", "est", "askglobes", "ball", "madmen", "miniseriestv",
                   "someone","u","impresssiveeee","hell","dick",'kinda'])
-    strict = set(["miniseriestv","oscar","congrats","goldengiobes","yay"])
+    strict = set(["miniseriestv","oscar","congrats","goldengiobes","yay","lets"])
     for tweets in tweets:
         sentence = " ".join(tweets)
         doc = nlp(sentence)
@@ -240,7 +240,8 @@ def find_object(tweets):
                 "his","her","man","woman","boy","girl","girls","part","she","he","so","hmmm","love","outstanding","is","president","song","original","hell","tonightso"
                 "this","what","bad","oscar","rage","amp","every","hell","winner","night","ok","pronunciation","next","news","anything","ovation","me","our","coffins","ampas"
                 ,"luck","yay","film","victory","blow","evening","movies","films","success","myself","tv","no","something","everyone","pic","globes","internet",'produce',
-                "them","lets","description","hollywood","writers","act","support","person","parents","category","year","fact","win","years","everything","actor"])
+                "them","lets","description","hollywood","writers","act","support","person","parents","category","year","fact","win","years","everything","actor",
+                "talk","mm","travesty","days","thanks","real","outrage","lol","asap","goals","enjoy"])
     for tweets in tweets:
         sentence = " ".join(tweets)
         doc = nlp(sentence)

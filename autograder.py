@@ -206,6 +206,7 @@ def main(years, grading):
 
     scores = {y: {g: {t:0 for t in types} for g in grading} for y in years}
     for y in years:
+        gg_api.pre_ceremony(y)
         with open('gg%sanswers.json' % y, 'r') as f:
             answers = json.load(f)
 

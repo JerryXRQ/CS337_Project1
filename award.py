@@ -36,7 +36,7 @@ def find_award(container):
                         candidate[extract] += 1
                         counter += 1
                         break
-                    if lis[j] in end_indicator or lis[j].capitalize() in n:
+                    if lis[j] in end_indicator or lis[j].capitalize() in n or (len(lis[j])>0 and (lis[j][-1]==":")):
                         if j<i+3:
                             break
                         target=lis[i:j]
@@ -69,7 +69,9 @@ def main():
     what it returns.'''
     # Your code here
     c=data.container("2013")
-    find_host(c)
+    temp=find_award(c)
+    for ele in temp:
+        print(ele)
     print("success")
 
 if __name__ == '__main__':
