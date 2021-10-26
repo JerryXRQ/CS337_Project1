@@ -5,7 +5,7 @@ import pandas as pd
 from collections import defaultdict
 import nltk
 import util
-
+import sys
 
 def find_tweets(container):
     filter=set(["lol","joke","jokes","laugh","funny","humorous","humor"])
@@ -41,14 +41,16 @@ def find_tweets(container):
         if len(key.split())*target[key]>best:
             best=len(key)*target[key]
             choice=key
-    print(choice)
+    print("Most Mentioned Joke Subject: ",choice)
     for ele in res:
         doc=nlp(" ".join(ele))
         for ent in doc.ents:
             if ent.label_=="PERSON":
                 counter[ent.text]+=1
                 mes[ent.text].append(ele)
-
+    person=[e for e in counter.keys()]
+    person.sort(key=lambda x:counter[x],reverse=True)
+    print("People who made good jokes: ",person[:min(3,len(person))])
 
     return counter,mes
 
@@ -64,8 +66,11 @@ def main():
     and then run gg_api.main(). This is the second thing the TA will
     run when grading. Do NOT change the name of this function or
     what it returns.'''
-
-    c=data.container('2013')
+    possible=set(["2013","2015","2018","2019"])
+    year='2013'
+    if len(sys.argv)>1 and sys.argv[1] in possible:
+        year=str(sys.argv[1])
+    c=data.container(year)
     counter,message=find_tweets(c)
     key=[k for k in counter.keys()]
     key.sort(key=lambda x:counter[x],reverse=True)

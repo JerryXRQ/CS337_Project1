@@ -7,6 +7,9 @@ import nltk
 import util
 from textblob import TextBlob
 from bing_image_downloader import downloader
+import sys
+import urllib
+
 
 def red_carpet(container,year):
     filter=set(["golden","globes","golden globes","goldenglobes","redcarpetman"])
@@ -57,10 +60,11 @@ def red_carpet(container,year):
         if counter[sentiment[j]] > 30:
             worst.append(sentiment[j])
         j -= 1
-    for ele in best:
-        downloader.download(ele+"golden globes"+year+"red carpet",limit=1,output_dir='red_carpet', adult_filter_off=False, force_replace=False, timeout=60, verbose=True)
-    for ele in worst:
-        downloader.download(ele+"golden globes"+year+"red carpet",limit=1,output_dir='red_carpet', adult_filter_off=False, force_replace=False, timeout=60, verbose=True)
+    try:
+        downloader.download(best[0]+" goldenglobes "+year+" redcarpet",limit=1,output_dir='red_carpet', adult_filter_off=False, force_replace=False, timeout=60, verbose=True)
+        downloader.download(worst[0]+" goldenglobes "+year+" redcarpet",limit=1,output_dir='red_carpet', adult_filter_off=False, force_replace=False, timeout=60, verbose=True)
+    except urllib.error.URLError:
+        print("Something when wrong when retrieving images from bing")
     print("Images saved to folder red_carpet")
 
     print("Most Mentioned: ",mention[:min(len(mention),3)])
@@ -82,9 +86,11 @@ def main():
     and then run gg_api.main(). This is the second thing the TA will
     run when grading. Do NOT change the name of this function or
     what it returns.'''
-
-    c=data.container('2013')
-    year='2013'
+    possible = set(["2013", "2015", "2018", "2019"])
+    year = '2013'
+    if len(sys.argv) > 1 and sys.argv[1] in possible:
+        year = str(sys.argv[1])
+    c = data.container(year)
     red_carpet(c,year)
 
     #print("Done")
