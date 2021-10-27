@@ -91,7 +91,8 @@ def find_presenter(container,award):
 
 
     for j in range(min(2,len(k))):
-       print(k[j])
+        k[j]=k[j].replace(" amp","")
+        print(k[j])
     #print(candidate)
     return k[:min(2,len(k))]
 

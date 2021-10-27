@@ -14,8 +14,14 @@ def search(container,award):
                     "wish", "hope", "pain","pains","would like"])
     filter=set(["present","presenter","presenting","copresent","presents","presented","oscar","president"])
     selected=[]
-
-    #print(reduce)
+    alternative={"tv":["tv","television","series","shows"],"series":["tv","television","series","shows"],
+                 "comedy":["comedy","musical"],"musical":["comedy","musical"],"drama":["drama"],
+                 "motion":["motion","picture","film","movie","pic"],"song":["music","song"],
+                 "screenplay":["screenplay","script","write"],"actor":["actor","he","man"],
+                 "actress":["actress","woman","she"],"director":["director","directs","produce","directing"],
+                 "score":["compose","score","composer","background"],"animated":["animated","animation","cartoon"],
+                 "picture": ["motion", "picture", "film", "movie", "pic"],"film": ["motion", "picture", "film", "movie", "pic"]}
+    exclude={"comedy":["drama"],"musical":"drama","drama":["comedy","musical"]}
     if "supporting" not in reduce and ("actor" in reduce or "actress" in reduce):
         filter.add("supporting")
     for ele in container.keys():
@@ -25,81 +31,19 @@ def search(container,award):
         det1=True
         det2=False
         for words in reduce:
-            if words == "tv" or words == "series":
-                if "tv" in s or "television" in s or "series" in s or "shows" in s:
-                    continue
-                elif "motion" not in s and "picture" not in s and "movie" not in s and "film" not in s:
-                    continue
-                else:
+            if words in alternative:
+                for ele in alternative[words]:
+                    if ele not in s:
+                        det1=False
+                        break
+                if words in exclude:
+                    for ele in exclude[words]:
+                        if ele not in s:
+                            det1=True
+            else:
+                if words not in s:
                     det1=False
-                    break
-            elif words=="comedy" or words=="musical":
-                if "comedy" in s or "musical" in s or "comed" in s or "music" in s:
-                    continue
-                elif "drama" not in s:
-                    continue
-                else:
-                    det1=False
-                    break
-            elif words=="drama":
-                if "comedy" in s or "musical" in s or "comed" in s or "music" in s:
-                    continue
-                elif "comedy" not in s and "musical" not in s:
-                    continue
-                else:
-                    det1=False
-                    break
-
-            elif words=="motion" or words=="picture" or words=="film":
-                if "motion" in s or "picture" in s or "movie" in s or "film" in s or "pic" in s:
-                    continue
-                else:
-                    det1=False
-                    break
-            elif words=="song":
-                if "music" in s or "song" in s:
-                    continue
-                else:
-                    det1=False
-                    break
-            elif words=="screenplay":
-                if "screen" in s or "write" in s or "script" in s:
-                    continue
-                else:
-                    det1=False
-                    break
-            elif words=="actor":
-                if "he" in s or "actor" in s or "man" in s:
-                    continue
-                else:
-                    det1=False
-                    break
-            elif words=="actress":
-                if "she" in s or "actress" in s or "woman" in s:
-                    continue
-                else:
-                    det1=False
-                    break
-            elif words=="director":
-                if "direct" in s or "directs" in s or "produce" in s or words in s or "directing" in s:
-                    continue
-                else:
-                    det1=False
-                    break
-            elif words=="score":
-                if "score" in s or "compose" in s:
-                    continue
-                else:
-                    det1=False
-                    break
-            elif words=="animated":
-                if "animate" in s or "cartoon" in s or "animation" in s:
-                    continue
-                else:
-                    det1=False
-                    break
-            elif words not in s:
-                det1=False
+            if det1==False:
                 break
         if not det1:
             continue
@@ -130,7 +74,6 @@ def winner_based(name,container):
         m=container.get(ele)
         lis=m.get_text()
         s=" ".join(lis)
-        det1=True
         det2=False
         if name not in s:
             continue
@@ -226,31 +169,29 @@ def find_female(tweets,female_names):
                         dic[res] += 1
     return dic
 
-def find_object(tweets):
+def find_object(tweets,names):
     dic = defaultdict(int)
     nlp = spacy.load("en_core_web_sm")
-    male_names = nltk.corpus.names.words('male.txt')
-    female_names = nltk.corpus.names.words('female.txt')
-    n=set(male_names+female_names)
     filter=set(["golden globe","goldenglobe","the golden globe","good","goldenglobes","series","you","tv","awards",
                 "comedy","season","deserve","award","drama","motion","picture","movie","song","great","win"
-                   ,"who","what","the","guy","tune","nbc","est","askglobes","ball","madmen","miniseriestv","someone","u","anyone","reports","tonightso"])
+                   ,"who","what","the","guy","tune","nbc","est","askglobes","ball","madmen","miniseriestv","someone",
+                "u","anyone","reports","tonightso","us","a farce","kinda","my opinion","the rest","host"])
     strict=set(["show","drunk","room",'robbedgoldenglobes',"globe","nominations","win","finales","fingers","nomination","really","award","series","pm","tonight","comedy",
                  "goldenglobes","motion","picture","movie","animated",'golden',"nominee","nominees","drama","him","their","they","it","congrats","best","winner","congratulations","i","we",
                 "his","her","man","woman","boy","girl","girls","part","she","he","so","hmmm","love","outstanding","is","president","song","original","hell","tonightso"
                 "this","what","bad","oscar","rage","amp","every","hell","winner","night","ok","pronunciation","next","news","anything","ovation","me","our","coffins","ampas"
                 ,"luck","yay","film","victory","blow","evening","movies","films","success","myself","tv","no","something","everyone","pic","globes","internet",'produce',
                 "them","lets","description","hollywood","writers","act","support","person","parents","category","year","fact","win","years","everything","actor",
-                "talk","mm","travesty","days","thanks","real","outrage","lol","asap","goals","enjoy"])
-    for tweets in tweets:
-        sentence = " ".join(tweets)
+                "talk","mm","travesty","days","thanks","real","outrage","lol","asap","goals","enjoy","jajaja","woohoo","seasons"])
+    for tweet in tweets:
+        sentence = " ".join(tweet)
         doc = nlp(sentence)
         for np in doc.noun_chunks:  # use np instead of np.text
             det=True
             if np.text in filter:
                 break
             for ele in np.text.split():
-                if ele in strict or (ele.capitalize() in n and ele!="lincoln"):
+                if ele in strict or (ele.capitalize() in names and ele!="lincoln"):
                     det=False
                     break
             if det:
@@ -287,6 +228,11 @@ def new_find_obj(tweets,ref):
     return dic
 
 def find_nominee(container,award):
+
+    male_names = nltk.corpus.names.words('male.txt')
+    female_names = nltk.corpus.names.words('female.txt')
+    n=set(male_names+female_names)
+
     selected=search(container,award)
     dic=None
     if len(selected)<5:
@@ -297,7 +243,7 @@ def find_nominee(container,award):
             dic = find_person(new)
 
         else:
-            dic = find_object(new)
+            dic = find_object(new,n)
         if target in dic:
             dic.pop(target)
     else:
