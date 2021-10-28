@@ -6,6 +6,7 @@ from collections import defaultdict
 import nltk
 import util
 import winner
+import multiprocessing
 
 def search(container,award):
     reduce = util.process_name_nom(award)
@@ -175,14 +176,14 @@ def find_object(tweets,names):
     filter=set(["golden globe","goldenglobe","the golden globe","good","goldenglobes","series","you","tv","awards",
                 "comedy","season","deserve","award","drama","motion","picture","movie","song","great","win"
                    ,"who","what","the","guy","tune","nbc","est","askglobes","ball","madmen","miniseriestv","someone",
-                "u","anyone","reports","tonightso","us","a farce","kinda","my opinion","the rest","host"])
+                "u","anyone","reports","tonightso","us","a farce","kinda","my opinion","the rest","host","abc","hbo"])
     strict=set(["show","drunk","room",'robbedgoldenglobes',"globe","nominations","win","finales","fingers","nomination","really","award","series","pm","tonight","comedy",
                  "goldenglobes","motion","picture","movie","animated",'golden',"nominee","nominees","drama","him","their","they","it","congrats","best","winner","congratulations","i","we",
                 "his","her","man","woman","boy","girl","girls","part","she","he","so","hmmm","love","outstanding","is","president","song","original","hell","tonightso"
                 "this","what","bad","oscar","rage","amp","every","hell","winner","night","ok","pronunciation","next","news","anything","ovation","me","our","coffins","ampas"
                 ,"luck","yay","film","victory","blow","evening","movies","films","success","myself","tv","no","something","everyone","pic","globes","internet",'produce',
                 "them","lets","description","hollywood","writers","act","support","person","parents","category","year","fact","win","years","everything","actor",
-                "talk","mm","travesty","days","thanks","real","outrage","lol","asap","goals","enjoy","jajaja","woohoo","seasons"])
+                "talk","mm","travesty","days","thanks","real","outrage","lol","asap","goals","enjoy","jajaja","woohoo","seasons","classy","its"])
     for tweet in tweets:
         sentence = " ".join(tweet)
         doc = nlp(sentence)
@@ -208,7 +209,7 @@ def new_find_obj(tweets,ref):
         ["golden globe", "goldenglobe", "the golden globe", "good", "goldenglobes", "series", "you", "tv", "awards",
          "comedy", "season", "deserve", "award", "drama", "motion", "picture", "movie", "song", "great", "win"
             , "who", "what", "the", "guy", "tune", "nbc", "est", "askglobes", "ball", "madmen", "miniseriestv",
-         "someone", "u", "anyone", "reports", "tonightso","1","no",'l', 'ted', 'television', 'hope', 'poe'])
+         "someone", "u", "anyone", "reports", "tonightso","1","no",'l', 'ted', 'television', 'hope', 'poe',"abc","hbo"])
     strict = set(["show", "drunk", "room", 'robbedgoldenglobes', "globe", "nominations", "win", "finales", "fingers",
                   "nomination", "really", "award", "series", "pm", "tonight", "comedy",
                   "goldenglobes", "motion", "picture", "movie", "animated", 'golden', "nominee", "nominees", "drama",
@@ -219,7 +220,7 @@ def new_find_obj(tweets,ref):
                   "amp", "every", "hell", "winner", "night", "ok", "pronunciation", "next", "news", "anything",
                   "ovation", "me", "our", "coffins", "ampas"
                      , "luck", "yay", "film", "victory", "blow", "evening", "movies", "films", "success", "myself",
-                  "tv"])
+                  "tv","classy","its"])
     for tweets in tweets:
         sentence = " ".join(tweets)
         for ele in ref:
@@ -262,13 +263,23 @@ def find_nominee(container,award):
         temp = temp.replace("the golden globe", "")
         temp = temp.replace("the golden globe", "")
         temp = temp.replace(" goldenglobes", "")
+        temp = temp.replace(" amp "," ")
+        temp = temp.replace(" lover", "")
+        temp = temp.replace("2013", "")
         res.append(temp)
     print(res)
     return res
 
 
 
+def run_all(lis,c,dic):
 
+    # find_nominee(c,'best performance by an actor in a supporting role in a motion picture',None)
+    # return
+    # util.get_movies_year1("2012")
+    for ele in lis:
+        print(ele)
+        dic[ele]=find_nominee(c, ele)
 
 def main():
     '''This function calls your program. Typing "python gg_api.py"
@@ -300,14 +311,25 @@ def main():
                             'best performance by an actress in a supporting role in a series, mini-series or motion picture made for television',
                             'best performance by an actor in a supporting role in a series, mini-series or motion picture made for television']
 
-    c=data.container("2013")
-    #find_nominee(c,'best performance by an actor in a supporting role in a motion picture',None)
-    #return
-    #util.get_movies_year1("2012")
-    for ele in OFFICIAL_AWARDS_1315:
-        print(ele)
-        find_nominee(c, ele)
-    #print("Done")
+    c = data.container("2013")
+    l1=[[],[],[],[]]
+    manager = multiprocessing.Manager()
+    return_dict = manager.dict()
+    for i in range(len(OFFICIAL_AWARDS_1315)):
+        l1[i%4].append(OFFICIAL_AWARDS_1315[i])
+    p1=multiprocessing.Process(target=run_all,args=(l1[0],c,return_dict))
+    p2=multiprocessing.Process(target=run_all,args=(l1[1],c,return_dict))
+    p3 = multiprocessing.Process(target=run_all, args=(l1[2], c,return_dict))
+    p4 = multiprocessing.Process(target=run_all, args=(l1[3], c,return_dict))
+    p1.start()
+    p2.start()
+    p3.start()
+    p4.start()
+    p1.join()
+    p2.join()
+    p3.join()
+    p4.join()
+    print(return_dict)
 
 if __name__ == '__main__':
     main()
