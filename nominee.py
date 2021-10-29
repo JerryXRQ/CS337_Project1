@@ -8,6 +8,47 @@ import util
 import winner
 import multiprocessing
 
+def broad_search(container,award):
+    reduce = util.expand_search(award)
+    key_word = set(["nominee", "nominees", "nominate", "nominates", "nominated", "nomination", "up for",
+                    "should win", "robbed", "should have won", "would've won", "sad", "runner"
+                    "wish", "hope", "pain","pains","would like", "win","won","wins","winning","goes to","receive"])
+    filter=set(["nominee","nominate","nominates","present","presenter","presenting","copresent","presents","presented","oscar","should","hope","should've"])
+    selected = []
+    if "supporting" not in reduce and ("actor" in reduce or "actress" in reduce):
+        filter.add("supporting")
+    for ele in container.keys():
+        m = container.get(ele)
+        lis = m.get_text()
+        s = set(lis)
+        det1 = True
+        det2 = False
+        for words in reduce:
+            if words == "tv":
+                if "tv" in s or "television" in s:
+                    continue
+            elif words not in s and words+"." not in s:
+                det1 = False
+                break
+        if not det1:
+            continue
+        detf=True
+        for ele in filter:
+            if ele in s:
+                detf=False
+                break
+        if not detf:
+            continue
+        for kw in key_word:
+            if kw in s:
+                det2 = True
+        if det2:
+            selected.append(lis)
+    #print(selected)
+    return selected
+
+
+
 def search(container,award):
     reduce = util.process_name_nom(award)
     key_word = set(["nominee", "nominees", "nominate", "nominates", "nominated", "nomination", "up for",
@@ -234,7 +275,7 @@ def find_nominee(container,award):
     female_names = nltk.corpus.names.words('female.txt')
     n=set(male_names+female_names)
 
-    selected=search(container,award)
+    selected=broad_search(container,award)
     dic=None
     if len(selected)<5:
         target=winner.find_winner(container, award)
@@ -252,7 +293,7 @@ def find_nominee(container,award):
             dic=find_person(selected)
 
         else:
-            dic=find_object(selected)
+            dic=find_object(selected, n)
 
     k=[k for k in dic.keys()]
     k.sort(key=lambda x:dic[x],reverse=True)
