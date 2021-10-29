@@ -5,7 +5,7 @@ import pandas as pd
 from collections import defaultdict
 import nltk
 import util
-import winner
+import 
 import multiprocessing
 
 def broad_search(container,award):
@@ -13,7 +13,7 @@ def broad_search(container,award):
     key_word = set(["nominee", "nominees", "nominate", "nominates", "nominated", "nomination", "up for",
                     "should win", "robbed", "should have won", "would've won", "sad", "runner"
                     "wish", "hope", "pain","pains","would like", "win","won","wins","winning","goes to","receive"])
-    filter=set(["nominee","nominate","nominates","present","presenter","presenting","copresent","presents","presented","oscar","should","hope","should've"])
+    filter=set(["present","presenter","presenting","copresent","presents","presented","oscar"])
     selected = []
     if "supporting" not in reduce and ("actor" in reduce or "actress" in reduce):
         filter.add("supporting")
