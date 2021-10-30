@@ -324,20 +324,20 @@ def find_nominee(container,award):
         temp = temp.replace("2013", "")
         res.append(temp)
     #print(res)
-    if not("actor" in award or "actress" in award or "score" in award or "song" in award or "cecil" in award or "director" in award):
-        title_base = pd.read_csv("titleyeargenrerateing.csv")["primaryTitle"]
-        a=[]
-        for title in res:
-            #print("hello", award, title, )
-            #print("here ", process.extract(title, title_base, scorer=fuzz.token_sort_ratio)[0][0])
-            a.append(process.extract(title, title_base, scorer=fuzz.token_sort_ratio)[0][0])
-        res = a
-    elif "actor" in award or "actress" in award or "director" in award or "cecil" in award:
-        name_base = pd.read_csv("nameslist.csv")["primaryName"]
-        a = []
-        for name in res:
-            a.append(process.extract(name, name_base, scorer=fuzz.token_sort_ratio)[0][0])
-        res=a
+    # if not("actor" in award or "actress" in award or "score" in award or "song" in award or "cecil" in award or "director" in award):
+    #     title_base = pd.read_csv("titleyeargenrerateing.csv")["primaryTitle"]
+    #     a=[]
+    #     for title in res:
+    #         #print("hello", award, title, )
+    #         #print("here ", process.extract(title, title_base, scorer=fuzz.token_sort_ratio)[0][0])
+    #         a.append(process.extract(title, title_base, scorer=fuzz.token_sort_ratio)[0][0])
+    #     res = a
+    # elif "actor" in award or "actress" in award or "director" in award or "cecil" in award:
+    #     name_base = pd.read_csv("nameslist.csv")["primaryName"]
+    #     a = []
+    #     for name in res:
+    #         a.append(process.extract(name, name_base, scorer=fuzz.token_sort_ratio)[0][0])
+    #     res=a
     #print(res)
     return res
 
