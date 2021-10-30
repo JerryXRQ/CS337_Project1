@@ -64,7 +64,7 @@ def red_carpet(container,year):
         downloader.download(best[0]+" goldenglobes "+year+" redcarpet",limit=1,output_dir='red_carpet', adult_filter_off=False, force_replace=False, timeout=60, verbose=True)
         downloader.download(worst[0]+" goldenglobes "+year+" redcarpet",limit=1,output_dir='red_carpet', adult_filter_off=False, force_replace=False, timeout=60, verbose=True)
     except urllib.error.URLError:
-        print("Something when wrong when retrieving images from bing")
+        print("Something when wrong when retrieving images from Bing")
     print("Images saved to folder red_carpet")
 
     print("Most Mentioned: ",mention[:min(len(mention),3)])
