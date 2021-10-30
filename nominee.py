@@ -6,47 +6,11 @@ from collections import defaultdict
 import nltk
 import util
 import winner
+import re
+from nltk.corpus import stopwords
+from imdb import IMDb 
 import multiprocessing
-
-def broad_search(container,award):
-    reduce = util.expand_search(award)
-    key_word = set(["nominee", "nominees", "nominate", "nominates", "nominated", "nomination", "up for",
-                    "should win", "robbed", "should have won", "would've won", "sad", "runner"
-                    "wish", "hope", "pain","pains","would like", "win","won","wins","winning","goes to","receive"])
-    filter=set(["present","presenter","presenting","copresent","presents","presented","oscar"])
-    selected = []
-    if "supporting" not in reduce and ("actor" in reduce or "actress" in reduce):
-        filter.add("supporting")
-    for ele in container.keys():
-        m = container.get(ele)
-        lis = m.get_text()
-        s = set(lis)
-        det1 = True
-        det2 = False
-        for words in reduce:
-            if words == "tv":
-                if "tv" in s or "television" in s:
-                    continue
-            elif words not in s and words+"." not in s:
-                det1 = False
-                break
-        if not det1:
-            continue
-        detf=True
-        for ele in filter:
-            if ele in s:
-                detf=False
-                break
-        if not detf:
-            continue
-        for kw in key_word:
-            if kw in s:
-                det2 = True
-        if det2:
-            selected.append(lis)
-    #print(selected)
-    return selected
-
+from fuzzywuzzy import process, fuzz
 
 
 def search(container,award):
@@ -70,6 +34,7 @@ def search(container,award):
         m=container.get(ele)
         lis=m.get_text()
         s=set(lis)
+        #print (lis)
         det1=True
         det2=False
         for words in reduce:
@@ -111,6 +76,7 @@ def winner_based(name,container):
                     "wish", "hope", "pain","pains","would like"])
     filter=set(["present","presenter","presenting","copresent","presents","presented","oscar"])
     selected=[]
+    pat = re.compile('.*(hop(ed|ing|e|es))\s(@)?(\w+)\s(w(o|i)(n|ns|nning)).*', re.IGNORECASE)
 
     for ele in container.keys():
         m=container.get(ele)
@@ -121,7 +87,8 @@ def winner_based(name,container):
             continue
         detf=True
         for ele in filter:
-            if ele in s:
+        
+            if ele in s or re.search(pat, s):
                 detf=False
                 break
         if not detf:
@@ -146,7 +113,7 @@ def find_person(tweets):
         sentence = " ".join(tweets)
         doc = nlp(sentence)
         for ent in doc.ents:
-            if ent.label_ == "PERSON" and ent.text not in filter:
+            if ent.label_ == "PERSON":# and ent.text not in filter:
                 det=True
                 for ele in strict:
                     if ele in ent.text:
@@ -162,6 +129,54 @@ def find_person(tweets):
                     res = res.replace(" wins", "")
                     res = res.replace(" won","")
                     dic[res] += 1
+    return dic
+
+
+# stopwordsList = stopwords.words('english') + ['GoldenGlobes', 'Golden', 'Globes', 'Golden Globes', 'RT', 'VanityFair', 'golden', 'globes' '@', 'I', 'we', 'http', '://', '/', 'com', 'Best', 'best', 'Looking','Nice', 'Most', 'Pop', 'Hip Hop', 'Rap', 'We', 'Love', 'Awkward','Piece', 'While', 'Boo', 'Yay', 'Congrats', 'And', 'The', 'Gq', 'Refinery29', 'USWeekly', 'TMZ', 'Hollywood', 'Watching', 'Hooray', 'That', 'Yeah', 'Can', 'So', 'And', 'But', 'What', 'NShowBiz', 'She', 'Mejor', 'Did', 'Vanity', 'Fair', 'Drama', 'MotionPicture', 'News', 'Take', 'Before', 'Director', 'Award', 'Movie Award', 'Music Award', 'Best Director', 'Best Actor', 'Best Actress', 'Am', 'Golden Globe', 'Globe', 'Awards', 'It']
+# def get_human_names(text):
+#     i = IMDb()
+#     person_list = []
+#     tweet_names = []
+#     person_list = []
+#     #get potential names that are consecutive capital words
+#     for tweet in text:
+#         person_list += re.findall('([A-Z][a-z]+(?:\s[A-Z][a-z]+)*)'," ".join(tweet))
+    
+#     #remove
+#     for word in person_list:
+#         if word not in stopwordsList:
+#             if word in tweet_names:
+#                 tweet_names.append(word)
+#             elif i.search_person(word) != []:
+#                 tweet_names.append(word)
+
+
+#     return tweet_names
+
+
+
+
+
+    #for tweets in tweets:
+        #sentence = " ".join(tweets)
+        #doc = nlp(sentence)
+        #for ent in doc.ents:
+        #    if ent.label_ == "PERSON":# and ent.text not in filter:
+        #        det=True
+        #        for ele in strict:
+        #            if ele in ent.text:
+        #                det=False
+        #        if "golden" in ent.text or "globe" in ent.text:
+        #            det=False
+        #        if det:
+        #            res=ent.text.replace("best actress ","")
+        #            res = res.replace("hope ","")
+        #            res = res.replace(" best actress", "")
+        #            res = res.replace("best actor ", "")
+        #            res = res.replace(" best actor", "")
+        #            res = res.replace(" wins", "")
+        #            res = res.replace(" won","")
+        #dic[res] += 1
     return dic
 
 def find_male(tweets,male_names):
@@ -244,6 +259,7 @@ def find_object(tweets,names):
                 dic[res]+=1
     return dic
 
+
 def new_find_obj(tweets,ref):
     dic=defaultdict(int)
     filter = set(
@@ -275,29 +291,28 @@ def find_nominee(container,award):
     female_names = nltk.corpus.names.words('female.txt')
     n=set(male_names+female_names)
 
-    selected=broad_search(container,award)
     dic=None
-    if len(selected)<5:
-        target=winner.find_winner(container, award)
 
-        new=winner_based(target,container)
-        if "actor" in award or "actress" in award or "director" in award or "cecil" in award:
-            dic = find_person(new)
+    target=winner.find_winner(container, award)
 
-        else:
-            dic = find_object(new,n)
-        if target in dic:
-            dic.pop(target)
+    new=winner_based(target,container)
+    if "actor" in award or "actress" in award or "director" in award or "cecil" in award:
+        #print(get_human_names(new))
+        #print(find_person(new))
+        dic = find_person(new)
+
     else:
-        if "actor" in award or "actress" in award or "director" in award or "cecil" in award:
-            dic=find_person(selected)
-
-        else:
-            dic=find_object(selected, n)
+        dic = find_object(new,n)
+    if target in dic:
+        dic.pop(target)
+    
+    titles_set = set(["actor", "actress", "score", "song", "cecil"])
 
     k=[k for k in dic.keys()]
-    k.sort(key=lambda x:dic[x],reverse=True)
+    #print("K", k)
 
+    k.sort(key=lambda x:dic[x],reverse=True)
+    #print(k)
     res=[]
     for j in range(min(5,len(k))):
         temp=k[j].replace("nominee ","")
@@ -308,7 +323,22 @@ def find_nominee(container,award):
         temp = temp.replace(" lover", "")
         temp = temp.replace("2013", "")
         res.append(temp)
-    print(res)
+    #print(res)
+    if not("actor" in award or "actress" in award or "score" in award or "song" in award or "cecil" in award or "director" in award):
+        title_base = pd.read_csv("titleyeargenrerateing.csv")["primaryTitle"]
+        a=[]
+        for title in res:
+            #print("hello", award, title, )
+            #print("here ", process.extract(title, title_base, scorer=fuzz.token_sort_ratio)[0][0])
+            a.append(process.extract(title, title_base, scorer=fuzz.token_sort_ratio)[0][0])
+        res = a
+    elif "actor" in award or "actress" in award or "director" in award or "cecil" in award:
+        name_base = pd.read_csv("nameslist.csv")["primaryName"]
+        a = []
+        for name in res:
+            a.append(process.extract(name, name_base, scorer=fuzz.token_sort_ratio)[0][0])
+        res=a
+    #print(res)
     return res
 
 
@@ -329,17 +359,22 @@ def main():
     run when grading. Do NOT change the name of this function or
     what it returns.'''
     # Your code here
-    OFFICIAL_AWARDS_1315 = ['cecil b. demille award', 'best motion picture - drama',
+    
+    OFFICIAL_AWARDS_1315 = ['cecil b. demille award', 
+                            'best motion picture - drama',
                             'best performance by an actress in a motion picture - drama',
                             'best performance by an actor in a motion picture - drama',
                             'best motion picture - comedy or musical',
                             'best performance by an actress in a motion picture - comedy or musical',
                             'best performance by an actor in a motion picture - comedy or musical',
-                            'best animated feature film', 'best foreign language film',
+                            'best animated feature film', 
+                            'best foreign language film',
                             'best performance by an actress in a supporting role in a motion picture',
                             'best performance by an actor in a supporting role in a motion picture',
-                            'best director - motion picture', 'best screenplay - motion picture',
-                            'best original score - motion picture', 'best original song - motion picture',
+                            'best director - motion picture', 
+                            'best screenplay - motion picture',
+                            'best original score - motion picture', 
+                            'best original song - motion picture',
                             'best television series - drama',
                             'best performance by an actress in a television series - drama',
                             'best performance by an actor in a television series - drama',
@@ -352,6 +387,8 @@ def main():
                             'best performance by an actress in a supporting role in a series, mini-series or motion picture made for television',
                             'best performance by an actor in a supporting role in a series, mini-series or motion picture made for television']
 
+
+    
     c = data.container("2013")
     l1=[[],[],[],[]]
     manager = multiprocessing.Manager()
