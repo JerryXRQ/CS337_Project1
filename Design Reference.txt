@@ -1,0 +1,9 @@
+This is a list of all the github repositories we referenced when designing our implementation.
+
+https://github.com/noah-alvarado/cs-337-project-1
+https://github.com/VictorJuang/CS337-NLP-Project-1
+https://github.com/Felipe-Caldeira/CS-337-Project-1
+https://github.com/kapil1garg/eecs337-team3-project1
+https://github.com/rojaswestall/cs337
+
+Most of these projects have little impact on our final design.
