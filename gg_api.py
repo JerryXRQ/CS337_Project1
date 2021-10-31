@@ -177,22 +177,22 @@ def main():
     run when grading. Do NOT change the name of this function or
     what it returns.'''
     # Your code here
-    pre_ceremony('2015')
-    host=get_hosts('2015')
-    award=get_awards('2015')
-    presenter=get_presenters('2015')
-    winner=get_winner('2015')
-    nominee=get_nominees('2015')
-    sentim = get_sentiment(winner.values())
+    #pre_ceremony('2015')
+    #host=get_hosts('2015')
+    #award=get_awards('2015')
+    #presenter=get_presenters('2015')
+    #winner=get_winner('2015')
+    #nominee=get_nominees('2015')
+    #sentim = get_sentiment(winner.values())
 
-    print("Hosts: ",host[0],"  ",host[1])
-    for ele in OFFICIAL_AWARDS_1315:
-        print("Award: ",ele)
-        print("Presenter: ",", ".join(presenter[ele]))
-        print("Nominee: ", ", ".join(nominee[ele]))
-        print("Winner: ",winner[ele])
-        print("Sentiment: ", sentim[winner[ele]])
-    return
+    #print("Hosts: ",host[0],"  ",host[1])
+    #for ele in OFFICIAL_AWARDS_1315:
+        #print("Award: ",ele)
+        #print("Presenter: ",", ".join(presenter[ele]))
+        #print("Nominee: ", ", ".join(nominee[ele]))
+        #print("Winner: ",winner[ele])
+        #print("Sentiment: ", sentim[winner[ele]])
+    #return
 
 if __name__ == '__main__':
     main()

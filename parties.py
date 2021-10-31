@@ -14,7 +14,7 @@ import winner
 from nltk.sentiment import SentimentIntensityAnalyzer
 import sys
 
-nltk.download("vader_lexicon")
+#nltk.download("vader_lexicon")
 
 def party_hosts(container, year):
     key_word = set(["afterparty", "after party"])
@@ -51,12 +51,6 @@ def party_hosts(container, year):
 
 
 def main():
-    '''This function calls your program. Typing "python gg_api.py"
-    will run this function. Or, in the interpreter, import gg_api
-    and then run gg_api.main(). This is the second thing the TA will
-    run when grading. Do NOT change the name of this function or
-    what it returns.'''
-    # Your code here
     possible = set(["2013", "2015", "2018", "2019"])
     year = '2013'
     if len(sys.argv) > 1 and sys.argv[1] in possible:

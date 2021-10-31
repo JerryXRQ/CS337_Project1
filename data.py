@@ -51,7 +51,7 @@ class container(object):
         input = pd.read_json(file)
         self.dic=dict()
         curr=0
-        sample=input.sample(min(len(input),500000))
+        sample=input.sample(min(len(input),700000))
         ten=len(sample)//10
         counter=0
         for i,r in sample.iterrows():
@@ -71,11 +71,6 @@ class container(object):
 
 
 def main():
-    '''This function calls your program. Typing "python gg_api.py"
-    will run this function. Or, in the interpreter, import gg_api
-    and then run gg_api.main(). This is the second thing the TA will
-    run when grading. Do NOT change the name of this function or
-    what it returns.'''
     # Your code here
     file="gg2015.json"
     input=pd.read_json(file)

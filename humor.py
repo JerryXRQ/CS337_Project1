@@ -61,11 +61,6 @@ def find_tweets(container):
 
 
 def main():
-    '''This function calls your program. Typing "python gg_api.py"
-    will run this function. Or, in the interpreter, import gg_api
-    and then run gg_api.main(). This is the second thing the TA will
-    run when grading. Do NOT change the name of this function or
-    what it returns.'''
     possible=set(["2013","2015","2018","2019"])
     year='2013'
     if len(sys.argv)>1 and sys.argv[1] in possible:

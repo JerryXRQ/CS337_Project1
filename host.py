@@ -60,12 +60,6 @@ def find_host(container):
 
 
 def main():
-    '''This function calls your program. Typing "python gg_api.py"
-    will run this function. Or, in the interpreter, import gg_api
-    and then run gg_api.main(). This is the second thing the TA will
-    run when grading. Do NOT change the name of this function or
-    what it returns.'''
-    # Your code here
     c=data.container("2015")
     find_host(c)
 

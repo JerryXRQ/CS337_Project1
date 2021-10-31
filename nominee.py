@@ -12,7 +12,7 @@ def search(container,award):
     #print(reduce)
     key_word = set(["nominee", "nominees", "nominate", "nominates", "nominated", "nomination", "up for",
                     "should win", "robbed", "should have won", "would've won", "sad", "runner"
-                    "wish", "hope", "pain","pains","would like"])
+                    "wish", "hope", "pain","pains","would like","clear choice"])
     filter=set(["present","presenter","presenting","copresent","presents","presented","oscar","president"])
     selected=[]
     alternative={"tv":["tv","television","series","shows","hbo","netflix","hulu"],"series":["tv","television","series","shows","hbo","netflix","hulu"],
@@ -46,8 +46,8 @@ def search(container,award):
                     if det:
                         det_temp=False
             else:
-                if words not in s:
-                    det_temp=False
+                if words in s:
+                    det_temp=True
             if det_temp==False:
                 break
         if not det1:
@@ -241,15 +241,16 @@ def find_nominee(container,award):
     selected=search(container,award)
     dic=None
     #print(selected)
-    if len(selected)<5:
+    if len(selected)<20:
         target=winner.find_winner(container, award)
 
         new=winner_based(target,container)
+        combined=new+selected
         if "actor" in award or "actress" in award or "director" in award or "cecil" in award:
-            dic = find_person(new)
+            dic = find_person(combined)
 
         else:
-            dic = find_object(new,n)
+            dic = find_object(combined,n)
         if target in dic:
             dic.pop(target)
     else:
@@ -277,12 +278,6 @@ def find_nominee(container,award):
 
 
 def main():
-    '''This function calls your program. Typing "python gg_api.py"
-    will run this function. Or, in the interpreter, import gg_api
-    and then run gg_api.main(). This is the second thing the TA will
-    run when grading. Do NOT change the name of this function or
-    what it returns.'''
-    # Your code here
     OFFICIAL_AWARDS_1315 = ['cecil b. demille award', 'best motion picture - drama',
                             'best performance by an actress in a motion picture - drama',
                             'best performance by an actor in a motion picture - drama',
@@ -306,15 +301,15 @@ def main():
                             'best performance by an actress in a supporting role in a series, mini-series or motion picture made for television',
                             'best performance by an actor in a supporting role in a series, mini-series or motion picture made for television']
 
-    c=data.container("2013")
-    find_nominee(c,'best animated feature film')
-    return
+    c=data.container("2015")
+    #find_nominee(c,'best animated feature film')
+    #return
     #util.get_movies_year1("2012")
     dic= {}
     for ele in OFFICIAL_AWARDS_1315:
         print(ele)
         dic[ele]=find_nominee(c, ele)
-    #print(dic)
+    print(dic)
     #print("Done")
 
 if __name__ == '__main__':

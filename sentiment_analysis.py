@@ -13,7 +13,7 @@ import winner
 from nltk.sentiment import SentimentIntensityAnalyzer
 import sys
 
-nltk.download("vader_lexicon")
+#nltk.download("vader_lexicon")
 
 def sentiment(container, name):
     person_tweets = []
@@ -34,11 +34,6 @@ def sentiment(container, name):
 
 
 def main():
-    '''This function calls your program. Typing "python gg_api.py"
-    will run this function. Or, in the interpreter, import gg_api
-    and then run gg_api.main(). This is the second thing the TA will
-    run when grading. Do NOT change the name of this function or
-    what it returns.'''
     # Your code here
     year = str(sys.argv[1])
     name = str(sys.argv[2])
