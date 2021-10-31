@@ -93,7 +93,7 @@ def main():
     word_cloud = WordCloud(width=800, height=600, random_state=21, max_font_size=150).generate(combined)
     plt.imshow(word_cloud, interpolation='bilinear')
     plt.axis('off')
-    plt.savefig('wordcloud')
+    plt.savefig('sentiment/wordcloud.png')
     # plt.show()
 
     # sort by analysis
@@ -109,7 +109,7 @@ def main():
     plt.title('Sentiment Analysis')
     plt.xlabel('Polarity')
     plt.ylabel('Subjectivity')
-    plt.savefig('polar vs sub')
+    plt.savefig('sentiment/polar vs sub.png')
     # plt.show()
 
     # common sentiment (single word) used
