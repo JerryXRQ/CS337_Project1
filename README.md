@@ -6,7 +6,12 @@ Github Link: https://github.com/JerryXRQ/CS337_Project1
 
 The packages necessary to run our code are included in the file final_requirements.txt. However, the following packages might require separate installation.
 
-For spacy, we need to install en_core_web_sm via python -m spacy download en.
+For spacy, we need to install en_core_web_sm via 
+
+pip install https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.3.1/en_core_web_sm-2.3.1.tar.gz.
+
+Newer versions of this module seemed to have difficulty identifying people as effectively.
+
 For nltk, we need to add the names files with the command python -m nltk.downloader names and the vader tools with command python -m nltk.downloader vader_lexicon.
 For textblob, we need to download necessary data by running python -m textblob.download_corpora.
 
@@ -14,7 +19,7 @@ To run the autograder, simply use the command python autograder.py (+year). To g
 
 To make the runtime more manageable, we enabled multiprocessing in our code. The multithreading is performed in gg_api.py on tasks nominee, winner, and presenter. In case multiprocessing cause problems when running our code, we included the single-threaded version of gg_api.py. By replacing everything in gg_api.py with the content of gg_api_single_thread.py, the code will run in single-threaded mode.
 
-We also included some different approaches we have attempted for the tasks. For nominees.py, we created selected sets of movie names, TV series names, actor names, actress names, and director names, which were used to match the content of the tweets. However, because of the runtime requirements, we could not use it in our final submission. This method should be able to improve the overall performance on that task. You can see our attempt in nominee-modified.py.
+We also included some different approaches we have attempted for the tasks. For nominees.py, we created selected sets of movie names, TV series names, actor names, actress names, and director names, which were used to match the content of the tweets. However, because of the runtime requirements, we could not use it in our final submission. This method should be able to improve the overall performance on that task. You can see our attempt in nominee-modified.py. Note these datasets are derived from the IMDb publicly accessible datasets found at https://datasets.imdbws.com/ with documentaiton for the datasets at https://www.imdb.com/interfaces/.
 
 The extra tasks we attempted include the following.
 
