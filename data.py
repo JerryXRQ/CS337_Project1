@@ -8,7 +8,7 @@ class message(object):
     def __init__(self,raw):
         self.hashtags=[]
         self.text=[]
-
+        self.user = []
         filter='[A-z|0-9|-|,|:]'
         s=set(["GoldenGlobes","goldenglobes","globes","golden"])
         for words in raw['text'].split(' '):
@@ -31,12 +31,18 @@ class message(object):
                 if len(new)>0:
                     final=new.lower()
                     self.text.append(final)
+        #print(raw)
+        self.user = raw["user"]["screen_name"]
         #print(self.hashtags,self.text)
+
     def get_text(self):
         return self.text
 
     def get_hashtags(self):
         return self.hashtags
+    
+    def get_user(self):
+        return self.user
 
 
 class container(object):
