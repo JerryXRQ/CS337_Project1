@@ -1,10 +1,10 @@
-'''Version 0.35'''
+b'''Version 0.35'''
 import pandas as pd
 import json
 import re
 import pandas as pd
-import requests
-from bs4 import BeautifulSoup as bs
+#import requests
+#from bs4 import BeautifulSoup as bs
 
 # File to download and extract:  https://datasets.imdbws.com/title.basics.tsv.gz
 path_set = "data.tsv" # path imdb dataset

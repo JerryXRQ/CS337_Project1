@@ -9,6 +9,7 @@ import winner
 
 def search(container,award):
     reduce = util.process_name_nom(award)
+    #print(reduce)
     key_word = set(["nominee", "nominees", "nominate", "nominates", "nominated", "nomination", "up for",
                     "should win", "robbed", "should have won", "would've won", "sad", "runner"
                     "wish", "hope", "pain","pains","would like"])
@@ -28,22 +29,26 @@ def search(container,award):
         m=container.get(ele)
         lis=m.get_text()
         s=set(lis)
-        det1=True
+        det1=False
         det2=False
         for words in reduce:
+            det_temp=False
             if words in alternative:
                 for ele in alternative[words]:
-                    if ele not in s:
-                        det1=False
+                    if ele in s:
+                        det_temp=True
                         break
                 if words in exclude:
+                    det=True
                     for ele in exclude[words]:
-                        if ele not in s:
-                            det1=True
+                        if ele in s:
+                            det=False
+                    if det:
+                        det_temp=False
             else:
                 if words not in s:
-                    det1=False
-            if det1==False:
+                    det_temp=False
+            if det_temp==False:
                 break
         if not det1:
             continue
@@ -182,7 +187,7 @@ def find_object(tweets,names):
                 "this","what","bad","oscar","rage","amp","every","hell","winner","night","ok","pronunciation","next","news","anything","ovation","me","our","coffins","ampas"
                 ,"luck","yay","film","victory","blow","evening","movies","films","success","myself","tv","no","something","everyone","pic","globes","internet",'produce',
                 "them","lets","description","hollywood","writers","act","support","person","parents","category","year","fact","win","years","everything","actor",
-                "talk","mm","travesty","days","thanks","real","outrage","lol","asap","goals","enjoy","jajaja","woohoo","seasons","list","awards"])
+                "talk","mm","travesty","days","thanks","real","outrage","lol","asap","goals","enjoy","jajaja","woohoo","seasons","list","awards","time","people","goldenglobe","stupid","jazz"])
     for tweet in tweets:
         sentence = " ".join(tweet)
         doc = nlp(sentence)
@@ -235,6 +240,7 @@ def find_nominee(container,award):
 
     selected=search(container,award)
     dic=None
+    #print(selected)
     if len(selected)<5:
         target=winner.find_winner(container, award)
 
@@ -251,7 +257,7 @@ def find_nominee(container,award):
             dic=find_person(selected)
 
         else:
-            dic=find_object(selected)
+            dic=find_object(selected,n)
 
     k=[k for k in dic.keys()]
     k.sort(key=lambda x:dic[x],reverse=True)
@@ -301,12 +307,14 @@ def main():
                             'best performance by an actor in a supporting role in a series, mini-series or motion picture made for television']
 
     c=data.container("2013")
-    #find_nominee(c,'best performance by an actor in a supporting role in a motion picture',None)
-    #return
+    find_nominee(c,'best animated feature film')
+    return
     #util.get_movies_year1("2012")
+    dic= {}
     for ele in OFFICIAL_AWARDS_1315:
         print(ele)
-        find_nominee(c, ele)
+        dic[ele]=find_nominee(c, ele)
+    #print(dic)
     #print("Done")
 
 if __name__ == '__main__':
