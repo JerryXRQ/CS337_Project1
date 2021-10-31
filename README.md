@@ -1,10 +1,13 @@
 # gg-project-master
 Golden Globe Project Master
+Group 2
+Members: Jerry Xu, Daniel Wang, Jonathan Katz
+Github Link: https://github.com/JerryXRQ/CS337_Project1
 
 The packages necessary to run our code are included in the file final_requirements.txt. However, the following packages might require separate installation.
 
 For spacy, we need to install en_core_web_sm via python -m spacy download en.
-For nltk, we need to add the names files with command python -m nltk.downloader names and the vader tools with command python -m nltk.downloader vader_lexicon.
+For nltk, we need to add the names files with the command python -m nltk.downloader names and the vader tools with command python -m nltk.downloader vader_lexicon.
 For textblob, we need to download necessary data by running python -m textblob.download_corpora.
 
 To run the autograder, simply use the command python autograder.py (+year).
@@ -41,14 +44,14 @@ To run the code, use the command python sentiment_analysis.py. You need to add a
 
 Sentiment Analysis - General Sentiment Analysis for Common Subjects
 
-We implemented a code that scans all the tweets for positive and negative sentiment. It will look for positive words and tweets, negative tweets, and neutral tweets, producing a representative sample. Additionally, it will create a word cloud plot of common words and a corresponding sentiment score and polarity plot. The color of the words in the word cloud is mapped to the ones in the sentiment plot. We have included the 2013 result as reference.
+We implemented a code that scans all the tweets for positive and negative sentiment. It will look for positive words and tweets, negative tweets, and neutral tweets, producing a representative sample. Additionally, it will create a word cloud plot of common words and a corresponding sentiment score and polarity plot. The color of the words in the word cloud is mapped to the ones in the sentiment plot. We have included the 2013 result as a reference.
 
 To run the code, use the command python sentiment_analysis_general.py. You can add an optional year input. If it is not provided, then 2013 will be selected by default. The plot is designed to be saved in a folder called sentiment. However, the tool does not create the folder automatically. Please make sure that this folder is created in advance.
 
 
 Some reference performance:
 
-Because we use sampling, the scores we get tend to be not stable. The following are results from five consecutive runs. It should reflect our average case performance.
+Because we use sampling, the scores we get tend to be not stable. The following are results from five consecutive runs. It should reflect our average-case performance.
 
 Test Environment: Harley Server
 Run Time: 4 min
