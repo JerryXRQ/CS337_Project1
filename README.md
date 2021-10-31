@@ -33,6 +33,12 @@ We implemented a program that tracks the most discussed parties of a given year.
 
 To run the code, use the command python parties.py. You can add a year after the input to control which year the code runs on. If that input is not provided, it will choose 2013 by default. It requires "vader_lexicon" package of nltk, but the code can download it automatically.
 
+Sentiment Analysis - Sentiment towards a Person
+
+We implemented a program that evaluates the sentiment score of the public for a given person in a given year. It returns a score that reflects the average sentiment. A positive value reflects positive sentiment and a negative value reflects negative sentiment.
+
+To run the code, use the command python parties.py. You need to add a year and a name after the file name to control which target the code runs on. It requires "vader_lexicon" package of nltk, but the code can download it automatically.
+
 Some reference performance:
 
 Because we use sampling, the scores we get tend to be not stable. The following are results from five consecutive runs. It should reflect our average case performance.

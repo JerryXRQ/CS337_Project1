@@ -8,11 +8,10 @@ import nltk
 import util
 import winner
 import re
-from nltk.corpus import stopwords
-from imdb import IMDb 
 import multiprocessing
 import winner
 from nltk.sentiment import SentimentIntensityAnalyzer
+import sys
 
 nltk.download("vader_lexicon")
 
@@ -29,7 +28,7 @@ def sentiment(container, name):
     for i in person_tweets:
         sent += sia.polarity_scores(i)["compound"]
     sent = sent / len(person_tweets)
-    #print(sent)
+    print("Sentiment Score:",sent)
 
     return sent
 
@@ -41,10 +40,11 @@ def main():
     run when grading. Do NOT change the name of this function or
     what it returns.'''
     # Your code here
+    year = str(sys.argv[1])
+    name = str(sys.argv[2])
+    c = data.container(year)
+    par = sentiment(c, name)
 
-    c = data.container("2013")
-    par = sentiment(c, "ben affleck")
-    print(c)
 
 if __name__ == '__main__':
     main()
