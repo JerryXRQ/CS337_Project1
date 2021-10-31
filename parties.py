@@ -9,10 +9,10 @@ import util
 import winner
 import re
 from nltk.corpus import stopwords
-from imdb import IMDb 
 import multiprocessing
 import winner
 from nltk.sentiment import SentimentIntensityAnalyzer
+import sys
 
 nltk.download("vader_lexicon")
 
@@ -37,12 +37,16 @@ def party_hosts(container, year):
                 if i[0][j] == "golden":
                     if j >= 1:
                         hosts.append(i[0][j-1])
-    remove = [year, "the", "at", "a", "on", "to", "official"]
+    remove = [year, "the", "at", "a", "on", "to", "official","live","no","the","some","tonight","tonights","annual"
+              "party","one","instyle","attending","this","those","you","years","wild","my"]
     for i in remove:
         if i in hosts:
             hosts.remove(i)
     hosts = np.unique(hosts).tolist()
-    print(hosts)
+    for i in remove:
+        if i in hosts:
+            hosts.remove(i)
+    print("Most Popular Host: ",hosts)
     return hosts
 
 
@@ -53,9 +57,12 @@ def main():
     run when grading. Do NOT change the name of this function or
     what it returns.'''
     # Your code here
-
-    c = data.container("2015")
-    par = party_hosts(c, "2015")
+    possible = set(["2013", "2015", "2018", "2019"])
+    year = '2013'
+    if len(sys.argv) > 1 and sys.argv[1] in possible:
+        year = str(sys.argv[1])
+    c = data.container(year)
+    par = party_hosts(c, year)
     #print(c)
 
 if __name__ == '__main__':
