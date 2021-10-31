@@ -8,6 +8,8 @@ import winner
 import pandas as pd
 import multiprocessing
 import sentiment_analysis
+import json
+import sys
 
 OFFICIAL_AWARDS_1315 = ['cecil b. demille award', 'best motion picture - drama', 'best performance by an actress in a motion picture - drama', 'best performance by an actor in a motion picture - drama', 'best motion picture - comedy or musical', 'best performance by an actress in a motion picture - comedy or musical', 'best performance by an actor in a motion picture - comedy or musical', 'best animated feature film', 'best foreign language film', 'best performance by an actress in a supporting role in a motion picture', 'best performance by an actor in a supporting role in a motion picture', 'best director - motion picture', 'best screenplay - motion picture', 'best original score - motion picture', 'best original song - motion picture', 'best television series - drama', 'best performance by an actress in a television series - drama', 'best performance by an actor in a television series - drama', 'best television series - comedy or musical', 'best performance by an actress in a television series - comedy or musical', 'best performance by an actor in a television series - comedy or musical', 'best mini-series or motion picture made for television', 'best performance by an actress in a mini-series or motion picture made for television', 'best performance by an actor in a mini-series or motion picture made for television', 'best performance by an actress in a supporting role in a series, mini-series or motion picture made for television', 'best performance by an actor in a supporting role in a series, mini-series or motion picture made for television']
 OFFICIAL_AWARDS_1819 = ['best motion picture - drama', 'best motion picture - musical or comedy', 'best performance by an actress in a motion picture - drama', 'best performance by an actor in a motion picture - drama', 'best performance by an actress in a motion picture - musical or comedy', 'best performance by an actor in a motion picture - musical or comedy', 'best performance by an actress in a supporting role in any motion picture', 'best performance by an actor in a supporting role in any motion picture', 'best director - motion picture', 'best screenplay - motion picture', 'best motion picture - animated', 'best motion picture - foreign language', 'best original score - motion picture', 'best original song - motion picture', 'best television series - drama', 'best television series - musical or comedy', 'best television limited series or motion picture made for television', 'best performance by an actress in a limited series or a motion picture made for television', 'best performance by an actor in a limited series or a motion picture made for television', 'best performance by an actress in a television series - drama', 'best performance by an actor in a television series - drama', 'best performance by an actress in a television series - musical or comedy', 'best performance by an actor in a television series - musical or comedy', 'best performance by an actress in a supporting role in a series, limited series or motion picture made for television', 'best performance by an actor in a supporting role in a series, limited series or motion picture made for television', 'cecil b. demille award']
@@ -177,12 +179,30 @@ def main():
     run when grading. Do NOT change the name of this function or
     what it returns.'''
     # Your code here
-    #pre_ceremony('2015')
-    #host=get_hosts('2015')
-    #award=get_awards('2015')
-    #presenter=get_presenters('2015')
-    #winner=get_winner('2015')
-    #nominee=get_nominees('2015')
+    possible = set(["2013", "2015", "2018", "2019"])
+    year = '2013'
+    if len(sys.argv) > 1 and sys.argv[1] in possible:
+        year = str(sys.argv[1])
+    pre_ceremony(year)
+
+
+    #pre_ceremony(year)
+    host=get_hosts(year)
+    award=get_awards(year)
+    presenter=get_presenters(year)
+    winner=get_winner(year)
+    nominee=get_nominees(year)
+
+    awd=OFFICIAL_AWARDS_1315
+    if year=="2018" or year=="2019":
+        awd=OFFICIAL_AWARDS_1819
+    res={}
+    res["Host"]=host
+    for ele in awd:
+        res[ele]={"Award":ele,"Presenter":presenter[ele],"Nominees":nominee[ele],"Winner":winner[ele]}
+    with open(year+' output.json', 'w') as outfile:
+        json.dump(res, outfile)
+
     #sentim = get_sentiment(winner.values())
 
     #print("Hosts: ",host[0],"  ",host[1])

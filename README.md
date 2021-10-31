@@ -10,7 +10,7 @@ For spacy, we need to install en_core_web_sm via python -m spacy download en.
 For nltk, we need to add the names files with the command python -m nltk.downloader names and the vader tools with command python -m nltk.downloader vader_lexicon.
 For textblob, we need to download necessary data by running python -m textblob.download_corpora.
 
-To run the autograder, simply use the command python autograder.py (+year).
+To run the autograder, simply use the command python autograder.py (+year). To get the json output, please use the command python gg_api.py (+year). If a year is not provided to gg_api, the code will run 2013 by default. The reuslt will be stored in the same directory as the code.
 
 To make the runtime more manageable, we enabled multiprocessing in our code. The multithreading is performed in gg_api.py on tasks nominee, winner, and presenter. In case multiprocessing cause problems when running our code, we included the single-threaded version of gg_api.py. By replacing everything in gg_api.py with the content of gg_api_single_thread.py, the code will run in single-threaded mode.
 
