@@ -14,7 +14,7 @@ import multiprocessing
 import winner
 from nltk.sentiment import SentimentIntensityAnalyzer
 
-#nltk.download("vader_lexicon")
+nltk.download("vader_lexicon")
 
 def sentiment(container, name):
     person_tweets = []
