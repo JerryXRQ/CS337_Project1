@@ -8,6 +8,7 @@ class message(object):
     def __init__(self,raw):
         self.hashtags=[]
         self.text=[]
+        self.string = raw['text']
         self.user = []
         filter='[A-z|0-9|-|,|:]'
         s=set(["GoldenGlobes","goldenglobes","globes","golden"])
