@@ -7,6 +7,7 @@ import presenter
 import winner
 import pandas as pd
 import multiprocessing
+import sentiment_analysis
 
 OFFICIAL_AWARDS_1315 = ['cecil b. demille award', 'best motion picture - drama', 'best performance by an actress in a motion picture - drama', 'best performance by an actor in a motion picture - drama', 'best motion picture - comedy or musical', 'best performance by an actress in a motion picture - comedy or musical', 'best performance by an actor in a motion picture - comedy or musical', 'best animated feature film', 'best foreign language film', 'best performance by an actress in a supporting role in a motion picture', 'best performance by an actor in a supporting role in a motion picture', 'best director - motion picture', 'best screenplay - motion picture', 'best original score - motion picture', 'best original song - motion picture', 'best television series - drama', 'best performance by an actress in a television series - drama', 'best performance by an actor in a television series - drama', 'best television series - comedy or musical', 'best performance by an actress in a television series - comedy or musical', 'best performance by an actor in a television series - comedy or musical', 'best mini-series or motion picture made for television', 'best performance by an actress in a mini-series or motion picture made for television', 'best performance by an actor in a mini-series or motion picture made for television', 'best performance by an actress in a supporting role in a series, mini-series or motion picture made for television', 'best performance by an actor in a supporting role in a series, mini-series or motion picture made for television']
 OFFICIAL_AWARDS_1819 = ['best motion picture - drama', 'best motion picture - musical or comedy', 'best performance by an actress in a motion picture - drama', 'best performance by an actor in a motion picture - drama', 'best performance by an actress in a motion picture - musical or comedy', 'best performance by an actor in a motion picture - musical or comedy', 'best performance by an actress in a supporting role in any motion picture', 'best performance by an actor in a supporting role in any motion picture', 'best director - motion picture', 'best screenplay - motion picture', 'best motion picture - animated', 'best motion picture - foreign language', 'best original score - motion picture', 'best original song - motion picture', 'best television series - drama', 'best television series - musical or comedy', 'best television limited series or motion picture made for television', 'best performance by an actress in a limited series or a motion picture made for television', 'best performance by an actor in a limited series or a motion picture made for television', 'best performance by an actress in a television series - drama', 'best performance by an actor in a television series - drama', 'best performance by an actress in a television series - musical or comedy', 'best performance by an actor in a television series - musical or comedy', 'best performance by an actress in a supporting role in a series, limited series or motion picture made for television', 'best performance by an actor in a supporting role in a series, limited series or motion picture made for television', 'cecil b. demille award']
@@ -152,6 +153,12 @@ def get_presenters(year):
     print(year+" presenters finished")
     return presenters
 
+def get_sentiment(names):
+    sentiments = dict()
+    for i in names:
+        sentiments[i] = sentiment_analysis.sentiment(container, i)
+    return sentiments
+
 def pre_ceremony(year):
     '''This function loads/fetches/processes any data your program
     will use, and stores that data in your DB or in a json, csv, or
@@ -170,12 +177,13 @@ def main():
     run when grading. Do NOT change the name of this function or
     what it returns.'''
     # Your code here
-    pre_ceremony()
+    pre_ceremony('2015')
     host=get_hosts('2015')
     award=get_awards('2015')
     presenter=get_presenters('2015')
     winner=get_winner('2015')
     nominee=get_nominees('2015')
+    sentim = get_sentiment(winner.values())
 
     print("Hosts: ",host[0],"  ",host[1])
     for ele in OFFICIAL_AWARDS_1315:
@@ -183,6 +191,7 @@ def main():
         print("Presenter: ",", ".join(presenter[ele]))
         print("Nominee: ", ", ".join(nominee[ele]))
         print("Winner: ",winner[ele])
+        print("Sentiment: ", sentim[winner[ele]])
     return
 
 if __name__ == '__main__':

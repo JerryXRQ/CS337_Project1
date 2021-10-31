@@ -29,7 +29,7 @@ def sentiment(container, name):
     for i in person_tweets:
         sent += sia.polarity_scores(i)["compound"]
     sent = sent / len(person_tweets)
-    print(sent)
+    #print(sent)
 
     return sent
 
