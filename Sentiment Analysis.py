@@ -69,7 +69,7 @@ def main():
 
     # unified data initialization
     c = data.container("2013")
-    dic, _ = get_words_dict("all_words_subtlex_large.json")
+    dic, _ = get_words_dict("all_words_subtlex_small.json")
 
     # using raw strings
     df = pd.DataFrame([c.get(ele).string for ele in c.keys()], columns=["text"])
