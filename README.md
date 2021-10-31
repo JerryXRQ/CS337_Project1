@@ -1,11 +1,11 @@
 # gg-project-master
 Golden Globe Project Master
 
-The packages necessary to run our code are included in the file finalized_requirements.txt. However, the following packages might require separate installation.
+The packages necessary to run our code are included in the file final_requirements.txt. However, the following packages might require separate installation.
 
 For spacy, we need to install en_core_web_sm via python -m spacy download en.
-For nltk, we need to add the names files with command python -m nltk.downloader names
-For textblob, we need to download necessary data by running python -m textblob.download_corpora
+For nltk, we need to add the names files with command python -m nltk.downloader names and the vader tools with command python -m nltk.downloader vader_lexicon.
+For textblob, we need to download necessary data by running python -m textblob.download_corpora.
 
 To run the autograder, simply use the command python autograder.py (+year).
 
@@ -31,13 +31,20 @@ Parties - Best Party Hosts
 
 We implemented a program that tracks the most discussed parties of a given year. However, because the source data only includes a small time segment, many parties were not recorded. Therefore, the quality of data produced was limited.
 
-To run the code, use the command python parties.py. You can add a year after the input to control which year the code runs on. If that input is not provided, it will choose 2013 by default. It requires "vader_lexicon" package of nltk, but the code can download it automatically.
+To run the code, use the command python parties.py. You can add a year after the input to control which year the code runs on. If that input is not provided, it will choose 2013 by default.
 
 Sentiment Analysis - Sentiment towards a Person
 
 We implemented a program that evaluates the sentiment score of the public for a given person in a given year. It returns a score that reflects the average sentiment. A positive value reflects positive sentiment and a negative value reflects negative sentiment.
 
-To run the code, use the command python parties.py. You need to add a year and a name after the file name to control which target the code runs on. It requires "vader_lexicon" package of nltk, but the code can download it automatically.
+To run the code, use the command python sentiment_analysis.py. You need to add a year and a name after the file name to control which target the code runs on.
+
+Sentiment Analysis - General Sentiment Analysis for Common Subjects
+
+We implemented a code that scans all the tweets for positive and negative sentiment. It will look for positive words and tweets, negative tweets, and neutral tweets, producing a representative sample. Additionally, it will create a word cloud plot of common words and a corresponding sentiment score and polarity plot. The color of the words in the word cloud is mapped to the ones in the sentiment plot. The plot will be saved in the root directory.
+
+To run the code, use the command python sentiment_analysis_general.py. You can add an optional year input. If it is not provided, then 2013 will be selected by default.
+
 
 Some reference performance:
 
@@ -51,7 +58,7 @@ Performance:
 '2015': {'hosts': {'spelling': 1.0, 'completeness': 1.0}, 'awards': {'spelling': 0.7476993027915592, 'completeness': 0.3157142857142857}, 'nominees': {'spelling': 0.39444444444444443, 'completeness': 0.09447142857142858}, 'presenters': {'spelling': 0.4391025641025641, 'completeness': 0.3173076923076923}, 'winner': {'spelling': 0.6399161735700198}}
 
 Run Time: 4 min
-performance:
+Performance:
 '2013': {'hosts': {'spelling': 1.0, 'completeness': 1.0}, 'awards': {'spelling': 0.7650073118497129, 'completeness': 0.22368421052631576}, 'nominees': {'spelling': 0.38322945255937585, 'completeness': 0.09643095238095238}, 'presenters': {'spelling': 0.4230769230769231, 'completeness': 0.3064102564102564}, 'winner': {'spelling': 0.5769230769230769}}
 
 '2015': {'hosts': {'spelling': 1.0, 'completeness': 1.0}, 'awards': {'spelling': 0.747699302791559, 'completeness': 0.3157142857142857}, 'nominees': {'spelling': 0.27845827048768224, 'completeness': 0.08443333333333333}, 'presenters': {'spelling': 0.3042929292929293, 'completeness': 0.26346153846153847}, 'winner': {'spelling': 0.6014546351084813}}
