@@ -243,7 +243,7 @@ def find_nominee(container,award):
     selected=search(container,award)
     dic=None
     #print(selected)
-    if len(selected)<20:
+    if len(selected)<10:
         target=winner.find_winner(container, award)
 
         new=winner_based(target,container)
