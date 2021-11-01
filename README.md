@@ -78,6 +78,7 @@ Sample output omitted due to excessive length.
 We implemented a code that scans all tweets for most popular people and for each of them we created a action map that finds the most recognized acts he/she performed during the golden globes. The program returns action initiator as well as their top popular actions in a list.
 
 Sample output:   
+
 "jodie foster ['coming speech', 'dying jodie', 'get jodie']  
 amy poehler ['opening monologue', 'exciting clintons', 'comes torture']  
 tina fey ['opening monologue', 'drinking game', 'got school']"  
@@ -90,7 +91,9 @@ We implemented a code that perform sentiment analysis for top popular people. Fo
 To run the code, use the command python Loved.py. You can add an optional year input. If it is not provided, then 2013 will be selected by default. The plot is designed to be saved in a folder same as Loved.py.
 
 
-Sample output: "People most loved by social media: ['Tommy Lee Jones', 'Claire Danes', 'Maggie Smith', 'Lena Dunham', 'Bill Clinton']"
+Sample output:  
+
+"People most loved by social media: ['Tommy Lee Jones', 'Claire Danes', 'Maggie Smith', 'Lena Dunham', 'Bill Clinton']"
 
 
 Top Polarity - Sum.png
