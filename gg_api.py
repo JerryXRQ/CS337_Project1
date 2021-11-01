@@ -7,7 +7,7 @@ import presenter
 import winner
 import pandas as pd
 import multiprocessing
-import sentiment_analysis
+#import sentiment_analysis
 import json
 import sys
 
@@ -20,6 +20,7 @@ def get_hosts(year):
     of this function or what it returns.'''
     # Your code here
     hosts=host.find_host(container)
+    print(year + " hosts finished")
     return hosts
 
 
