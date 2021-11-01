@@ -53,6 +53,14 @@ We implemented a code that scans all the tweets for positive and negative sentim
 
 To run the code, use the command python sentiment_analysis_general.py. You can add an optional year input. If it is not provided, then 2013 will be selected by default. The plot is designed to be saved in a folder called sentiment. However, the tool does not create the folder automatically. Please make sure that this folder is created in advance.
 
+Act - Most popular Act
+
+TODO
+
+Sample Output:
+jodie foster ['coming speech', 'dying jodie', 'get jodie']
+amy poehler ['opening monologue', 'exciting clintons', 'comes torture']
+tina fey ['opening monologue', 'drinking game', 'got school']
 
 Some reference performance:
 
