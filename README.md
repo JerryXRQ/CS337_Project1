@@ -50,6 +50,23 @@ We implemented a code that scans all the tweets for positive and negative sentim
 
 To run the code, use the command python sentiment_analysis_general.py. You can add an optional year input. If it is not provided, then 2013 will be selected by default. The plot is designed to be saved in a folder called sentiment. However, the tool does not create the folder automatically. Please make sure that this folder is created in advance.
 
+Work Distribution
+Jerry Xu:
+Developed the framework of the program including data and utilities. /
+Wrote the code for all the basic requirements.
+Added extra task humor detection and red carpet.
+Tested all the code, wrote README file, and compiled the submission
+
+Daniel Wang:
+Added extra task sentiment analysis general, acts, and social media popularity analysis.
+Helped write README file and compile the submission.
+Helped tune the performance of the code.
+
+Jonathan Katz:
+Added extra task party detection and sentiment analysis for a given person.
+Helped test the code and write the README file.
+Gathered data for actors, actresses, directors, and movies
+Attempted an alternative approach for nominee.py.
 
 Some reference performance:
 
