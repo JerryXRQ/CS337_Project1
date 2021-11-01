@@ -20,65 +20,103 @@ We also included some different approaches we have attempted for the tasks. For 
 
 The extra tasks we attempted include the following.
 
-Humor Detection
+
+
+## Humor Detection
 
 We implemented humor detection. This code finds the people who made the best jokes through keyword search. It also includes a naive attempt at finding the subject of the joke by finding common elements in the selected tweets.
 
 To run the code, use the command python humor.py. You can add a year after the input to control which year the code runs on. If that input is not provided, it will choose 2013 by default.
 
-Red Carpet - Best Dressed and Worst Dressed
+
+
+## Red Carpet - Best Dressed and Worst Dressed
 
 We implemented best dressed and worse dressed analysis. This code uses keyword search and sentiment analysis to find the best and worse dressed. It also finds the most discussed person on Twitter. Additionally, we integrated Bing downloader to directly find pictures of the selected people online. However, this service is not stable. If the code detects errors, it will print "Something when wrong when retrieving images from Bing". Other functions should always run normally.
 
 To run the code, use the command python red_carpet.py. You can add a year after the input to control which year the code runs on. If that input is not provided, it will choose 2013 by default.
 
-Parties - Best Party Hosts
+
+
+## Parties - Best Party Hosts
 
 We implemented a program that tracks the most discussed parties of a given year. However, because the source data only includes a small time segment, many parties were not recorded. Therefore, the quality of data produced was limited.
 
 To run the code, use the command python parties.py. You can add a year after the input to control which year the code runs on. If that input is not provided, it will choose 2013 by default.
 
-Sentiment Analysis - Sentiment towards a Person
+
+
+## Sentiment Analysis - Sentiment towards a Person
 
 We implemented a program that evaluates the sentiment score of the public for a given person in a given year. It returns a score that reflects the average sentiment. A positive value reflects positive sentiment and a negative value reflects negative sentiment.
 
 To run the code, use the command python sentiment_analysis.py. You need to add a year and a name after the file name to control which target the code runs on.
 
-Sentiment Analysis - General Sentiment Analysis for Common Subjects
 
-We implemented a code that scans all the tweets for positive and negative sentiment. It will look for positive words and tweets, negative tweets, and neutral tweets, producing a representative sample. Additionally, it will create a word cloud plot of common words and a corresponding sentiment score and polarity plot. The color of the words in the word cloud is mapped to the ones in the sentiment plot. We have included the 2013 result as a reference.
+
+## Sentiment Analysis - General Sentiment Analysis for Common Subjects
+
+We implemented a code that scans all the tweets for positive and negative sentiment. It will look for positive words and tweets, negative tweets, and neutral tweets, producing representative samples with top subjectivity and/or polarity. Additionally, it will create a word cloud plot of common words and a corresponding sentiment score and polarity plot. The color of the words in the word cloud is mapped to the ones in the sentiment plot. We have included the 2013 result as a reference (see 'wordcloud.png' and 'polar vs sub.png').
+
+
+![](wordcloud.png)
+
+
+![](polar vs sub.png)
+
 
 To run the code, use the command python sentiment_analysis_general.py. You can add an optional year input. If it is not provided, then 2013 will be selected by default. The plot is designed to be saved in a folder called sentiment. However, the tool does not create the folder automatically. Please make sure that this folder is created in advance.
 
-Act - Most recognized acts
+Sample output omitted due to excessive length.
 
-Sample output: "jodie foster ['coming speech', 'dying jodie', 'get jodie']
-                amy poehler ['opening monologue', 'exciting clintons', 'comes torture']
-                tina fey ['opening monologue', 'drinking game', 'got school']"
+## Act - Most recognized acts
 
-Loved - Most loved people by social media
+We implemented a code that scans all tweets for most popular people and for each of them we created a action map that finds the most recognized acts he/she performed during the golden globes. The program returns action initiator as well as their top popular actions in a list.
+
+Sample output: "jodie foster ['coming speech', 'dying jodie', 'get jodie']  
+                amy poehler ['opening monologue', 'exciting clintons', 'comes torture']  
+                tina fey ['opening monologue', 'drinking game', 'got school']"  
+
+
+
+## Loved - Most loved people by social media
+
+![](Top Polarity - Avg.png)
+
+![](Top Polarity - Sum.png)
 
 Sample output: "People most loved by social media: ['Tommy Lee Jones', 'Claire Danes', 'Maggie Smith', 'Lena Dunham', 'Bill Clinton']"
 
-Work Distribution
-Jerry Xu:
+
+
+# Work Distribution
+
+
+### Jerry Xu:
 Developed the framework of the program including data and utilities. /
 Wrote the code for all the basic requirements.
 Added extra task humor detection and red carpet.
 Tested all the code, wrote README file, and compiled the submission
 
-Daniel Wang:
-Added extra task sentiment analysis general, acts, and social media popularity analysis.
-Helped write README file and compile the submission.
+
+
+### Daniel Wang:
+Wrote tasks 1) sentiment analysis general, 2) acts, and 3) social media popularity analysis (loved).
+Developed the weighting algorithm for nominee.
+Contributed in the writing and formating of README file as well as the submission compilation.
 Helped tune the performance of the code.
 
-Jonathan Katz:
+
+
+### Jonathan Katz:
 Added extra task party detection and sentiment analysis for a given person.
 Helped test the code and write the README file.
 Gathered data for actors, actresses, directors, and movies
 Attempted an alternative approach for nominee.py.
 
-Some reference performance:
+
+
+# Some reference performance:
 
 Because we use sampling, the scores we get tend to be not stable. The following are results from five consecutive runs. It should reflect our average-case performance.
 
