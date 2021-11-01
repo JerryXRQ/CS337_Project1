@@ -26,9 +26,9 @@ We implemented humor detection. This code finds the people who made the best jok
 
 To run the code, use the command python humor.py. You can add a year after the input to control which year the code runs on. If that input is not provided, it will choose 2013 by default.
 
- Red Carpet - Best Dressed and Worst Dressed
+Red Carpet - Best Dressed and Worst Dressed
 
- We implemented best dressed and worse dressed analysis. This code uses keyword search and sentiment analysis to find the best and worse dressed. It also finds the most discussed person on Twitter. Additionally, we integrated Bing downloader to directly find pictures of the selected people online. However, this service is not stable. If the code detects errors, it will print "Something when wrong when retrieving images from Bing". Other functions should always run normally.
+We implemented best dressed and worse dressed analysis. This code uses keyword search and sentiment analysis to find the best and worse dressed. It also finds the most discussed person on Twitter. Additionally, we integrated Bing downloader to directly find pictures of the selected people online. However, this service is not stable. If the code detects errors, it will print "Something when wrong when retrieving images from Bing". Other functions should always run normally.
 
 To run the code, use the command python red_carpet.py. You can add a year after the input to control which year the code runs on. If that input is not provided, it will choose 2013 by default.
 
@@ -49,6 +49,16 @@ Sentiment Analysis - General Sentiment Analysis for Common Subjects
 We implemented a code that scans all the tweets for positive and negative sentiment. It will look for positive words and tweets, negative tweets, and neutral tweets, producing a representative sample. Additionally, it will create a word cloud plot of common words and a corresponding sentiment score and polarity plot. The color of the words in the word cloud is mapped to the ones in the sentiment plot. We have included the 2013 result as a reference.
 
 To run the code, use the command python sentiment_analysis_general.py. You can add an optional year input. If it is not provided, then 2013 will be selected by default. The plot is designed to be saved in a folder called sentiment. However, the tool does not create the folder automatically. Please make sure that this folder is created in advance.
+
+Act - Most recognized acts
+
+Sample output: "jodie foster ['coming speech', 'dying jodie', 'get jodie']
+                amy poehler ['opening monologue', 'exciting clintons', 'comes torture']
+                tina fey ['opening monologue', 'drinking game', 'got school']"
+
+Loved - Most loved people by social media
+
+Sample output: "People most loved by social media: ['Tommy Lee Jones', 'Claire Danes', 'Maggie Smith', 'Lena Dunham', 'Bill Clinton']"
 
 Work Distribution
 Jerry Xu:
