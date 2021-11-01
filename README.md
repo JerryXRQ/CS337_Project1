@@ -58,15 +58,15 @@ Because we use sampling, the scores we get tend to be not stable. The following 
 Test Environment: Harley Server
 Run Time: 4 min
 Performance:
-'2013': {'hosts': {'spelling': 1.0, 'completeness': 1.0}, 'awards': {'spelling': 0.7511796676639619, 'completeness': 0.25270270270270273}, 'nominees': {'spelling': 0.458139759643596, 'completeness': 0.09987142857142857}, 'presenters': {'spelling': 0.4807692307692308, 'completeness': 0.3759615384615384}, 'winner': {'spelling': 0.6682692307692307}}
+'2013': {'hosts': {'spelling': 1.0, 'completeness': 1.0}, 'awards': {'spelling': 0.7511796676639619, 'completeness': 0.25270270270270273}, 'nominees': {'spelling': 0.44193672993673, 'completeness': 0.0823452380952381}, 'presenters': {'spelling': 0.44999999999999996, 'completeness': 0.33749999999999997}, 'winner': {'spelling': 0.6682692307692307}}
 
 '2015': {'hosts': {'spelling': 1.0, 'completeness': 1.0}, 'awards': {'spelling': 0.7476993027915592, 'completeness': 0.3157142857142857}, 'nominees': {'spelling': 0.39444444444444443, 'completeness': 0.09447142857142858}, 'presenters': {'spelling': 0.4391025641025641, 'completeness': 0.3173076923076923}, 'winner': {'spelling': 0.6399161735700198}}
 
 Run Time: 4 min
 Performance:
-'2013': {'hosts': {'spelling': 1.0, 'completeness': 1.0}, 'awards': {'spelling': 0.7650073118497128, 'completeness': 0.22368421052631576}, 'nominees': {'spelling': 0.5000480542475427, 'completeness': 0.12213333333333334}, 'presenters': {'spelling': 0.44999999999999996, 'completeness': 0.33749999999999997}, 'winner': {'spelling': 0.6682692307692307}}
+'2013': {'hosts': {'spelling': 1.0, 'completeness': 1.0}, 'awards': {'spelling': 0.7650073118497129, 'completeness': 0.22368421052631576}, 'nominees': {'spelling': 0.4774006862702516, 'completeness': 0.10399999999999998}, 'presenters': {'spelling': 0.44999999999999996, 'completeness': 0.33749999999999997}, 'winner': {'spelling': 0.6682692307692307}}}
 
-'2015': {'hosts': {'spelling': 1.0, 'completeness': 1.0}, 'awards': {'spelling': 0.755095752495701, 'completeness': 0.32499999999999996}, 'nominees': {'spelling': 0.4149714795008913, 'completeness': 0.1028095238095238}, 'presenters': {'spelling': 0.4017094017094017, 'completeness': 0.3679487179487179}, 'winner': {'spelling': 0.592948717948718}}
+'2015': {'hosts': {'spelling': 1.0, 'completeness': 1.0}, 'awards': {'spelling': 0.755095752495701, 'completeness': 0.32499999999999996}, 'nominees': {'spelling': 0.4340493966817497, 'completeness': 0.08358333333333333}, 'presenters': {'spelling': 0.4978438228438229, 'completeness': 0.31794871794871793}, 'winner': {'spelling': 0.6314102564102565}}
 
 Run Time: 4 min
 Performance:
@@ -76,6 +76,6 @@ Performance:
 
 Run Time: 4 min
 Performance
-'2013': {'hosts': {'spelling': 1.0, 'completeness': 1.0}, 'awards': {'spelling': 0.7650073118497129, 'completeness': 0.22368421052631576}, 'nominees': {'spelling': 0.3934255309907484, 'completeness': 0.09481190476190475}, 'presenters': {'spelling': 0.46153846153846156, 'completeness': 0.3237179487179487}, 'winner': {'spelling': 0.5769230769230769}}
+'2013': {'hosts': {'spelling': 1.0, 'completeness': 1.0}, 'awards': {'spelling': 0.7650073118497128, 'completeness': 0.22368421052631576}, 'nominees': {'spelling': 0.4528458208458208, 'completeness': 0.0878095238095238}, 'presenters': {'spelling': 0.44999999999999996, 'completeness': 0.33749999999999997}, 'winner': {'spelling': 0.6682692307692307}}
 
-'2015': {'hosts': {'spelling': 1.0, 'completeness': 1.0}, 'awards': {'spelling': 0.747699302791559, 'completeness': 0.3157142857142857}, 'nominees': {'spelling': 0.4437, 'completeness': 0.09289285714285715}, 'presenters': {'spelling': 0.4403651903651903, 'completeness': 0.3522435897435897}, 'winner': {'spelling': 0.592948717948718}}
+'2015': {'hosts': {'spelling': 1.0, 'completeness': 1.0}, 'awards': {'spelling': 0.747699302791559, 'completeness': 0.3157142857142857}, 'nominees': {'spelling': 0.3508549522373052, 'completeness': 0.10345714285714287}, 'presenters': {'spelling': 0.48951048951048953, 'completeness': 0.35673076923076924}, 'winner': {'spelling': 0.592948717948718}}
