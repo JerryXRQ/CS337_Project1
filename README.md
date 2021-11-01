@@ -62,7 +62,9 @@ We implemented a code that scans all the tweets for positive and negative sentim
 ![](wordcloud.png)
 
 
-![](polar vs sub.png)
+therfore:
+ 
+![](PolarvsSub.png)
 
 
 To run the code, use the command python sentiment_analysis_general.py. You can add an optional year input. If it is not provided, then 2013 will be selected by default. The plot is designed to be saved in a folder called sentiment. However, the tool does not create the folder automatically. Please make sure that this folder is created in advance.
@@ -81,9 +83,9 @@ Sample output: "jodie foster ['coming speech', 'dying jodie', 'get jodie']
 
 ## Loved - Most loved people by social media
 
-![](Top Polarity - Avg.png)
+![](TopPolarity-Avg.png)
 
-![](Top Polarity - Sum.png)
+![](TopPolarity-Sum.png)
 
 Sample output: "People most loved by social media: ['Tommy Lee Jones', 'Claire Danes', 'Maggie Smith', 'Lena Dunham', 'Bill Clinton']"
 
