@@ -56,13 +56,15 @@ To run the code, use the command python sentiment_analysis.py. You need to add a
 
 ## Sentiment Analysis - General Sentiment Analysis for Common Subjects
 
-We implemented a code that scans all the tweets for positive and negative sentiment. It will look for positive words and tweets, negative tweets, and neutral tweets, producing representative samples with top subjectivity and/or polarity. Additionally, it will create a word cloud plot of common words and a corresponding sentiment score and polarity plot. The color of the words in the word cloud is mapped to the ones in the sentiment plot. We have included the 2013 result as a reference (see 'wordcloud.png' and 'polar vs sub.png').
+We implemented a code that scans all the tweets for positive and negative sentiment. It will look for positive words and tweets, negative tweets, and neutral tweets, producing representative samples with top subjectivity and/or polarity. Additionally, it will create a word cloud plot of common words and a corresponding sentiment score and polarity plot. The color of the words in the word cloud is mapped to the ones in the sentiment plot. We have included the 2013 result as a reference (see 'wordcloud.png' and 'PolarvsSub.png').
+
+Wordcloud.png
 
 
 ![](wordcloud.png)
 
 
-therfore:
+Polar vs Sub.png
  
 ![](PolarvsSub.png)
 
@@ -75,20 +77,29 @@ Sample output omitted due to excessive length.
 
 We implemented a code that scans all tweets for most popular people and for each of them we created a action map that finds the most recognized acts he/she performed during the golden globes. The program returns action initiator as well as their top popular actions in a list.
 
-Sample output: "jodie foster ['coming speech', 'dying jodie', 'get jodie']  
-                amy poehler ['opening monologue', 'exciting clintons', 'comes torture']  
-                tina fey ['opening monologue', 'drinking game', 'got school']"  
-
+Sample output:   
+"jodie foster ['coming speech', 'dying jodie', 'get jodie']  
+amy poehler ['opening monologue', 'exciting clintons', 'comes torture']  
+tina fey ['opening monologue', 'drinking game', 'got school']"  
 
 
 ## Loved - Most loved people by social media
 
-![](TopPolarity-Avg.png)
+We implemented a code that perform sentiment analysis for top popular people. For each person, we calculate a polarity score based on each related tweets and rank them in descending order. We also generates two plots ('TopPolarity-Avg.png' and 'TopPolarity-Sum.png') to visualize the interrelationship between top popular people and their score. Finally, we combine those two plots to produce our final output for most liked people by social media.
 
-![](TopPolarity-Sum.png)
+To run the code, use the command python Loved.py. You can add an optional year input. If it is not provided, then 2013 will be selected by default. The plot is designed to be saved in a folder same as Loved.py.
+
 
 Sample output: "People most loved by social media: ['Tommy Lee Jones', 'Claire Danes', 'Maggie Smith', 'Lena Dunham', 'Bill Clinton']"
 
+
+Top Polarity - Sum.png
+
+![](TopPolarity-Sum.png)
+
+Top Polarity - Avg.png
+
+![](TopPolarity-Avg.png)
 
 
 # Work Distribution
