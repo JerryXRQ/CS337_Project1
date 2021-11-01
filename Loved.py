@@ -112,11 +112,12 @@ def main():
     plt.figure(figsize=(10, 8))
     for i in range(len(result_name_sum)):
         plt.scatter(i, result_score_sum[i], c=result_score_sum[i])
+        plt.text(i, result_score_sum[i], result_name_sum[i], fontsize=10)
     plt.xlabel("Names")
     plt.ylabel("Sum Polarity")
     plt.title(f"Top {num_people} people's polarity")
     plt.colorbar()
-    plt.xticks(np.arange(len(result_name_sum)), result_name_sum)
+    # plt.xticks(np.arange(len(result_name_sum)), result_name_sum)
     plt.savefig("Top Polarity - Sum.png")
     # plt.show()
 
@@ -128,11 +129,12 @@ def main():
     plt.figure(figsize=(10, 8))
     for i in range(len(result_name_avg)):
         plt.scatter(i, result_score_avg[i], c=result_score_avg[i])
+        plt.text(i, result_score_avg[i], result_name_avg[i], fontsize=10)
     plt.xlabel("Names")
     plt.ylabel("Sum Polarity")
     plt.title(f"Top {num_people} people's polarity")
     plt.colorbar()
-    plt.xticks(np.arange(len(result_name_avg)), result_name_avg)
+    # plt.xticks(np.arange(len(result_name_avg)), result_name_avg)
     plt.savefig("Top Polarity - Avg.png")
     # plt.show()
 
