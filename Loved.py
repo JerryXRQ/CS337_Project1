@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 
 from textblob import TextBlob
 import spacy
+import sys
 
 
 plt.style.use("fivethirtyeight")
@@ -74,9 +75,12 @@ def find_person(tweets):
 
 
 def main():
-
+    possible = set(["2013", "2015", "2018", "2019"])
+    year = '2013'
+    if len(sys.argv) > 1 and sys.argv[1] in possible:
+        year = str(sys.argv[1])
     # unified data initialization
-    c = data.container("2013")
+    c = data.container(year)
 
     # using raw strings
     df = pd.DataFrame([c.get(ele).string for ele in c.keys()], columns=["text"])
