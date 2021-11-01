@@ -4,7 +4,7 @@ Group 2
 Members: Jerry Xu, Daniel Wang, Jonathan Katz
 Github Link: https://github.com/JerryXRQ/CS337_Project1
 
-The packages necessary to run our code are included in the file final_requirements.txt. However, the following packages might require separate installation.
+The packages necessary to run our code are included in the file final_requirements.txt. We also included a file named final_requirements_katz.txt that worked on a different system. Please switch to that one in case the first one does not work. Additionally, the following packages might require separate installation.
 
 For spacy, we need to install en_core_web_sm via
 pip install https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.3.1/en_core_web_sm-2.3.1.tar.gz.
