@@ -11,6 +11,7 @@ import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 import spacy
+import sys
 
 # nltk pos reference (from Greeksforgeeks):
 # CC coordinating conjunction
@@ -85,9 +86,12 @@ def find_person(tweets):
 
 
 def main():
-
+    possible = set(["2013", "2015", "2018", "2019"])
+    year = '2013'
+    if len(sys.argv) > 1 and sys.argv[1] in possible:
+        year = str(sys.argv[1])
     # data initialization
-    c = data.container("2013")
+    c = data.container(year)
     tweets = [" ".join(c.get(ele).text) for ele in c.keys()]
     people = find_person(tweets)
     names = [name for name in people.keys()]

@@ -52,7 +52,7 @@ class container(object):
         input = pd.read_json(file)
         self.dic=dict()
         curr=0
-        sample=input.sample(min(len(input),700000))
+        sample=input.sample(min(len(input),800000))
         ten=len(sample)//10
         counter=0
         for i,r in sample.iterrows():
