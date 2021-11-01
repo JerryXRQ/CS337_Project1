@@ -29,7 +29,7 @@ def search(container,award):
         m=container.get(ele)
         lis=m.get_text()
         s=set(lis)
-        det1=False
+        det1=True
         det2=False
         for words in reduce:
             det_temp=False
@@ -44,11 +44,12 @@ def search(container,award):
                         if ele in s:
                             det=False
                     if det:
-                        det_temp=False
+                        det_temp=True
             else:
                 if words in s:
                     det_temp=True
             if det_temp==False:
+                det1=False
                 break
         if not det1:
             continue
@@ -187,7 +188,8 @@ def find_object(tweets,names):
                 "this","what","bad","oscar","rage","amp","every","hell","winner","night","ok","pronunciation","next","news","anything","ovation","me","our","coffins","ampas"
                 ,"luck","yay","film","victory","blow","evening","movies","films","success","myself","tv","no","something","everyone","pic","globes","internet",'produce',
                 "them","lets","description","hollywood","writers","act","support","person","parents","category","year","fact","win","years","everything","actor",
-                "talk","mm","travesty","days","thanks","real","outrage","lol","asap","goals","enjoy","jajaja","woohoo","seasons","list","awards","time","people","goldenglobe","stupid","jazz"])
+                "talk","mm","travesty","days","thanks","real","outrage","lol","asap","goals","enjoy","jajaja","woohoo","seasons","list","awards","time","people","goldenglobe",
+                "stupid","jazz","netflix","amazon","company","symbol"])
     for tweet in tweets:
         sentence = " ".join(tweet)
         doc = nlp(sentence)

@@ -6,28 +6,30 @@ from collections import defaultdict
 import nltk
 import util
 def narrow_search(container,award):
-    reduce = util.process_name(award)
+    reduce = util.process_name_nom(award)
     key_word = set(["present", "presented", "presents", "presenting", "presenter","copresent"])
     selected=[]
     for ele in container.keys():
-        m=container.get(ele)
-        lis=m.get_text()
-        s=set(lis)
-        det1=True
-        det2=False
+        m = container.get(ele)
+        lis = m.get_text()
+        s = set(lis)
+        det1 = True
+        det2 = False
         for words in reduce:
-            if words=="tv":
+            if words == "tv":
                 if "tv" in s or "television" in s:
                     continue
             elif words not in s:
-                det1=False
+                det1 = False
                 break
         if not det1:
             continue
+        detf = True
+
         for kw in key_word:
             if kw in s:
-                det2=True
-        if det2:
+                det2 = True
+        if det2 and detf:
             selected.append(lis)
     return selected
 

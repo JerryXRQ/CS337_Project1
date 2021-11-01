@@ -6,7 +6,9 @@ Github Link: https://github.com/JerryXRQ/CS337_Project1
 
 The packages necessary to run our code are included in the file final_requirements.txt. However, the following packages might require separate installation.
 
-For spacy, we need to install en_core_web_sm via python -m spacy download en.
+For spacy, we need to install en_core_web_sm via
+pip install https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.3.1/en_core_web_sm-2.3.1.tar.gz.
+Newer versions of this module seemed to have difficulty identifying people as effectively.
 For nltk, we need to add the names files with the command python -m nltk.downloader names and the vader tools with command python -m nltk.downloader vader_lexicon.
 For textblob, we need to download necessary data by running python -m textblob.download_corpora.
 
@@ -14,7 +16,7 @@ To run the autograder, simply use the command python autograder.py (+year). To g
 
 To make the runtime more manageable, we enabled multiprocessing in our code. The multithreading is performed in gg_api.py on tasks nominee, winner, and presenter. In case multiprocessing cause problems when running our code, we included the single-threaded version of gg_api.py. By replacing everything in gg_api.py with the content of gg_api_single_thread.py, the code will run in single-threaded mode.
 
-We also included some different approaches we have attempted for the tasks. For nominees.py, we created selected sets of movie names, TV series names, actor names, actress names, and director names, which were used to match the content of the tweets. However, because of the runtime requirements, we could not use it in our final submission. This method should be able to improve the overall performance on that task. You can see our attempt in nominee-modified.py.
+We also included some different approaches we have attempted for the tasks. For nominees.py, we created selected sets of movie names, TV series names, actor names, actress names, and director names, which were used to match the content of the tweets. However, because of the runtime requirements, we could not use it in our final submission. This method should be able to improve the overall performance on that task. You can see our attempt in nominee-modified.py. Note these datasets are derived from the IMDb publicly accessible datasets found at https://datasets.imdbws.com/ with documentaiton for the datasets at https://www.imdb.com/interfaces/.
 
 The extra tasks we attempted include the following.
 
@@ -56,24 +58,24 @@ Because we use sampling, the scores we get tend to be not stable. The following 
 Test Environment: Harley Server
 Run Time: 4 min
 Performance:
-'2013': {'hosts': {'spelling': 1.0, 'completeness': 1.0}, 'awards': {'spelling': 0.7511796676639619, 'completeness': 0.25270270270270273}, 'nominees': {'spelling': 0.34976281689325167, 'completeness': 0.07862142857142856}, 'presenters': {'spelling': 0.46153846153846156, 'completeness': 0.3237179487179487}, 'winner': {'spelling': 0.6153846153846154}}
+'2013': {'hosts': {'spelling': 1.0, 'completeness': 1.0}, 'awards': {'spelling': 0.7511796676639619, 'completeness': 0.25270270270270273}, 'nominees': {'spelling': 0.458139759643596, 'completeness': 0.09987142857142857}, 'presenters': {'spelling': 0.4807692307692308, 'completeness': 0.3759615384615384}, 'winner': {'spelling': 0.6682692307692307}}
 
 '2015': {'hosts': {'spelling': 1.0, 'completeness': 1.0}, 'awards': {'spelling': 0.7476993027915592, 'completeness': 0.3157142857142857}, 'nominees': {'spelling': 0.39444444444444443, 'completeness': 0.09447142857142858}, 'presenters': {'spelling': 0.4391025641025641, 'completeness': 0.3173076923076923}, 'winner': {'spelling': 0.6399161735700198}}
 
 Run Time: 4 min
 Performance:
-'2013': {'hosts': {'spelling': 1.0, 'completeness': 1.0}, 'awards': {'spelling': 0.7650073118497129, 'completeness': 0.22368421052631576}, 'nominees': {'spelling': 0.38322945255937585, 'completeness': 0.09643095238095238}, 'presenters': {'spelling': 0.4230769230769231, 'completeness': 0.3064102564102564}, 'winner': {'spelling': 0.5769230769230769}}
+'2013': {'hosts': {'spelling': 1.0, 'completeness': 1.0}, 'awards': {'spelling': 0.7650073118497128, 'completeness': 0.22368421052631576}, 'nominees': {'spelling': 0.5000480542475427, 'completeness': 0.12213333333333334}, 'presenters': {'spelling': 0.44999999999999996, 'completeness': 0.33749999999999997}, 'winner': {'spelling': 0.6682692307692307}}
 
-'2015': {'hosts': {'spelling': 1.0, 'completeness': 1.0}, 'awards': {'spelling': 0.747699302791559, 'completeness': 0.3157142857142857}, 'nominees': {'spelling': 0.27845827048768224, 'completeness': 0.08443333333333333}, 'presenters': {'spelling': 0.3042929292929293, 'completeness': 0.26346153846153847}, 'winner': {'spelling': 0.6014546351084813}}
+'2015': {'hosts': {'spelling': 1.0, 'completeness': 1.0}, 'awards': {'spelling': 0.755095752495701, 'completeness': 0.32499999999999996}, 'nominees': {'spelling': 0.4149714795008913, 'completeness': 0.1028095238095238}, 'presenters': {'spelling': 0.4017094017094017, 'completeness': 0.3679487179487179}, 'winner': {'spelling': 0.592948717948718}}
 
 Run Time: 4 min
 Performance:
-'2013': {'hosts': {'spelling': 1.0, 'completeness': 1.0}, 'awards': {'spelling': 0.7650073118497129, 'completeness': 0.22368421052631576}, 'nominees': {'spelling': 0.34976281689325167, 'completeness': 0.0780142857142857}, 'presenters': {'spelling': 0.4230769230769231, 'completeness': 0.3064102564102564}, 'winner': {'spelling': 0.5769230769230769}}
+'2013': {'hosts': {'spelling': 1.0, 'completeness': 1.0}, 'awards': {'spelling': 0.7650073118497129, 'completeness': 0.22368421052631576}, 'nominees': {'spelling': 0.4103342454646803, 'completeness': 0.0865142857142857}, 'presenters': {'spelling': 0.48846153846153845, 'completeness': 0.3548076923076922}, 'winner': {'spelling': 0.6682692307692307}}
 
-'2015': {'hosts': {'spelling': 1.0, 'completeness': 1.0}, 'awards': {'spelling': 0.7550957524957013, 'completeness': 0.32499999999999996}, 'nominees': {'spelling': 0.44185457516339866, 'completeness': 0.09690000000000001}, 'presenters': {'spelling': 0.3758741258741259, 'completeness': 0.26794871794871794}, 'winner': {'spelling': 0.6014546351084813}}
+'2015': {'hosts': {'spelling': 1.0, 'completeness': 1.0}, 'awards': {'spelling': 0.755095752495701, 'completeness': 0.32499999999999996}, 'nominees': {'spelling': 0.3805630970336853, 'completeness': 0.09313571428571428}, 'presenters': {'spelling': 0.49337307991154145, 'completeness': 0.35929487179487174}, 'winner': {'spelling': 0.6314102564102565}}}
 
 Run Time: 4 min
 Performance
 '2013': {'hosts': {'spelling': 1.0, 'completeness': 1.0}, 'awards': {'spelling': 0.7650073118497129, 'completeness': 0.22368421052631576}, 'nominees': {'spelling': 0.3934255309907484, 'completeness': 0.09481190476190475}, 'presenters': {'spelling': 0.46153846153846156, 'completeness': 0.3237179487179487}, 'winner': {'spelling': 0.5769230769230769}}
 
-'2015': {'hosts': {'spelling': 1.0, 'completeness': 1.0}, 'awards': {'spelling': 0.7476993027915593, 'completeness': 0.3157142857142857}, 'nominees': {'spelling': 0.4682961972667855, 'completeness': 0.10639761904761907}, 'presenters': {'spelling': 0.4051659125188537, 'completeness': 0.27147435897435895}, 'winner': {'spelling': 0.6399161735700198}}
+'2015': {'hosts': {'spelling': 1.0, 'completeness': 1.0}, 'awards': {'spelling': 0.747699302791559, 'completeness': 0.3157142857142857}, 'nominees': {'spelling': 0.4437, 'completeness': 0.09289285714285715}, 'presenters': {'spelling': 0.4403651903651903, 'completeness': 0.3522435897435897}, 'winner': {'spelling': 0.592948717948718}}
