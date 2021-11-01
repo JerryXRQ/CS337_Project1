@@ -38,7 +38,7 @@ def run_all_nominees(lis,dic,c):
     # return
     # util.get_movies_year1("2012")
     for ele in lis:
-        print(ele)
+        #print(ele)
         dic[ele]=nominee.find_nominee(c, ele)
 
 def get_nominees(year):
@@ -81,7 +81,7 @@ def run_all_winner(lis,dic,c):
     # return
     # util.get_movies_year1("2012")
     for ele in lis:
-        print(ele)
+        #print(ele)
         dic[ele]=winner.find_winner(c, ele)
 
 def get_winner(year):
@@ -121,7 +121,7 @@ def run_all_presenter(lis,dic,c):
     # return
     # util.get_movies_year1("2012")
     for ele in lis:
-        print(ele)
+        #print(ele)
         dic[ele]=presenter.find_presenter(c, ele)
 
 def get_presenters(year):

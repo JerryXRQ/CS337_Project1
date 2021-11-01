@@ -272,7 +272,7 @@ def find_nominee(container,award):
         temp = temp.replace("the golden globe", "")
         temp = temp.replace(" goldenglobes", "")
         res.append(temp)
-    print(res)
+    #print(res)
     return res
 
 
