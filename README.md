@@ -16,7 +16,9 @@ To run the autograder, simply use the command python autograder.py (+year). To g
 
 To make the runtime more manageable, we enabled multiprocessing in our code. The multithreading is performed in gg_api.py on tasks nominee, winner, and presenter. In case multiprocessing cause problems when running our code, we included the single-threaded version of gg_api.py. By replacing everything in gg_api.py with the content of gg_api_single_thread.py, the code will run in single-threaded mode.
 
-We also included some different approaches we have attempted for the tasks. For nominees.py, we created selected sets of movie names, TV series names, actor names, actress names, and director names, which were used to match the content of the tweets. However, because of the runtime requirements, we could not use it in our final submission. This method should be able to improve the overall performance on that task. You can see our attempt in nominee-modified.py. Note these datasets are derived from the IMDb publicly accessible datasets found at https://datasets.imdbws.com/ with documentaiton for the datasets at https://www.imdb.com/interfaces/.
+We also included some different approaches we have attempted for the tasks. For nominees.py, we created selected sets of movie names, TV series names, actor names, actress names, and director names, which were used to match the content of the tweets. However, because of the runtime requirements, we could not use it in our final submission. This method should be able to improve the overall performance on that task. You can see our attempt in nominee-modified.py. Note these datasets are derived from the IMDb publicly accessible datasets found at https://datasets.imdbws.com/ with documentaiton for the datasets at https://www.imdb.com/interfaces/. 
+
+We also created a weighting system for task nominee which was also excluded in the final version due to the excessive calculation. Such algorithm trys to assign a score for each pair of (tweet, award) using some basic text analysis and learning and accquire nominees for a certain award by sorting all potential nominees in weighted tweets scores. You can find this such algorithm in 'nominee weighted algorithm.py'.
 
 The extra tasks we attempted include the following.
 
@@ -77,11 +79,13 @@ Sample output omitted due to excessive length.
 
 We implemented a code that scans all tweets for most popular people and for each of them we created a action map that finds the most recognized acts he/she performed during the golden globes. The program returns action initiator as well as their top popular actions in a list.
 
-Sample output:   
+Sample output:  
 
 "jodie foster ['coming speech', 'dying jodie', 'get jodie']  
 amy poehler ['opening monologue', 'exciting clintons', 'comes torture']  
 tina fey ['opening monologue', 'drinking game', 'got school']"  
+
+(Note: this task takes 10-20min to execute due to a fully scan of words.)
 
 
 ## Loved - Most loved people by social media
@@ -91,7 +95,7 @@ We implemented a code that perform sentiment analysis for top popular people. Fo
 To run the code, use the command python Loved.py. You can add an optional year input. If it is not provided, then 2013 will be selected by default. The plot is designed to be saved in a folder same as Loved.py.
 
 
-Sample output:  
+Sample output:   
 
 "People most loved by social media: ['Tommy Lee Jones', 'Claire Danes', 'Maggie Smith', 'Lena Dunham', 'Bill Clinton']"
 
@@ -103,6 +107,9 @@ Top Polarity - Sum.png
 Top Polarity - Avg.png
 
 ![](TopPolarity-Avg.png)
+
+
+(Note: this task takes 15-25min to execute due to a fully scan of words.)
 
 
 # Work Distribution
